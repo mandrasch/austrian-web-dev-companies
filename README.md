@@ -4,7 +4,7 @@ Searching for a job can be tiresome, this map might help a bit. Good luck!
 
 Demo: https://austrian-web-dev-map.pages.dev/
 
-Hobby project with Svelte v5.🪄
+Hobby project with Svelte v5. 🪄
 
 ## Why?
 
@@ -14,13 +14,13 @@ I like searches like https://devjobs.at/teams/search, but I think they could be 
 
 I'll add new data based on latest active job offers or partner directories of CMSes / frameworks. Would be best to show companies with open job offers first, but portals like https://devjobs.at/ do a better job here (with crawlers).
 
-## Add a company
+### Add a company
 
 Please just open a PR and add the data to `static/companies.json`.
 
 ## TODOs
 
-- [ ] reset filters
+- [ ] mobile optimization
 - [ ] add selected values to url
 - [ ] pagination
 - [ ] add social share image
