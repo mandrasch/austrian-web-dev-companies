@@ -2,6 +2,10 @@
 
 Searching for a job can be tiresome, this map might help a bit. Good luck!
 
+Demo: https://austrian-web-dev-map.pages.dev/
+
+Hobby project with Svelte v5.🪄
+
 ## Why?
 
 I like searches like https://devjobs.at/teams/search, but I think they could be improved with a more stack-focused UI.
