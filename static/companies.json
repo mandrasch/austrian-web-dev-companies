@@ -3,7 +3,7 @@
 		"companyName": "Webmozarts",
 		"teaser": "Software- und App-Entwicklung in Wien und Barcelona",
 		"zipCodes": [1010],
-		"stackTags": ["symfony", "angular"],
+		"stackTags": ["Symfony", "Angular"],
 		"specialTags": [],
 		"websiteUrl": "https://webmozarts.com/",
 		"devjobsProfileUrl": "https://devjobs.at/team/webmozarts",
@@ -13,7 +13,7 @@
 		"companyName": "LOOP New Media",
 		"teaser": "LOOP — The fully charged digital powerhouse.",
 		"zipCodes": [1030, 5020],
-		"stackTags": ["laravel", "vue", "wordpress"],
+		"stackTags": ["Laravel", "Vue", "WordPress"],
 		"specialTags": ["fourDayWorkWeek"],
 		"websiteUrl": "https://www.agentur-loop.com/",
 		"devjobsProfileUrl": "https://devjobs.at/team/loop-new-media",
@@ -23,10 +23,20 @@
 		"companyName": "Fredmansky",
 		"teaser": "Fredmansky Werbeagentur",
 		"zipCodes": [4040, 4120, 8200, 1150],
-		"stackTags": ["craftcms", "vue", "wordpress"],
+		"stackTags": ["CraftCMS", "Vue", "WordPress"],
 		"specialTags": [],
 		"websiteUrl": "https://fredmansky.at/",
 		"devjobsProfileUrl": "https://devjobs.at/team/fredmansky",
+		"logo": ""
+	},
+	{
+		"companyName": "Navax Unternehmensgruppe",
+		"teaser": "NAVAX IT-Beratung und Consulting | Wien, Köln, Graz, Linz",
+		"zipCodes": [1120, 8010, 4020],
+		"stackTags": ["Svelte"],
+		"specialTags": [],
+		"websiteUrl": "https://www.navax.com",
+		"devjobsProfileUrl": "https://devjobs.at/team/navax-unternehmensgruppe",
 		"logo": ""
 	}
 ]

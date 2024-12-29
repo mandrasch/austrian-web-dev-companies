@@ -29,14 +29,14 @@
 
 	// Frontend frameworks
 	const availableFrontendFrameworks = [
-		{ label: 'Vue', value: 'vue' },
-		{ label: 'React', value: 'react' },
 		{ label: 'Angular', value: 'angular' },
-		{ label: 'Svelte', value: 'svelte' }
+		{ label: 'React', value: 'react' },
+		{ label: 'Svelte', value: 'svelte' },
+		{ label: 'Vue', value: 'vue' }
 	];
 
 	const availableSpecialTags = [
-		{ label: '4 day work week (or similiar models)', value: 'fourDayWorkWeek' }
+		{ label: '4 day work week (or similiar)', value: 'fourDayWorkWeek' }
 	];
 
 	// Reactive state for selected tags
@@ -212,7 +212,7 @@
 					</a> |
 				{/if} Zip: {company.zipCodes.join(', ')} | {company.stackTags.join(', ')}
 				{#if company.specialTags.includes('fourDayWorkWeek')}
-					| 🪄 4 day work week option
+					| 🪄 4 day work week (or similiar)
 				{/if}
 			</p>
 		</article>
