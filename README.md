@@ -1,38 +1,34 @@
-# sv
+# Austrian Web Dev Map
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Searching for a job can be tiresome, this map might help a bit. Good luck!
 
-## Creating a project
+## Why?
 
-If you're seeing this, you've probably already done this step. Congrats!
+I like searches like https://devjobs.at/teams/search, but I think they could be improved with a more stack-focused UI.
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Data sources
 
-# create a new project in my-app
-npx sv create my-app
-```
+I'll add new data based on latest active job offers or partner directories of CMSes / frameworks. Would be best to show companies with open job offers first, but portals like https://devjobs.at/ do a better job here (with crawlers).
 
-## Developing
+## Add a company
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Please just open a PR and add the data to `static/companies.json`.
 
-```bash
-npm run dev
+## TODOs
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- [ ] reset filters
+- [ ] add selected values to url
+- [ ] pagination
+- [ ] add social share image
+- [ ] add header
+- [ ] add footer
+- [ ] add imprint & privacy
+- [ ] isolate functions in components
+- [ ] add NodeJS CMS like strapi, directus
+- [ ] a11y check
+- [ ] GitHub corner
 
-## Building
+## Thanks to ...
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- https://github.com/sphade/svelte5-productfilter
+- https://simplecss.org/

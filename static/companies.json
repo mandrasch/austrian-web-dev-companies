@@ -1,0 +1,29 @@
+[
+	{
+		"companyName": "Webmozarts",
+		"teaser": "Software- und App-Entwicklung in Wien und Barcelona",
+		"zipCodes": [1010],
+		"stackTags": ["symfony", "angular"],
+		"websiteUrl": "https://webmozarts.com/",
+		"devjobsProfileUrl": "https://devjobs.at/team/webmozarts",
+		"logo": ""
+	},
+	{
+		"companyName": "LOOP New Media",
+		"teaser": "LOOP — The fully charged digital powerhouse.",
+		"zipCodes": [1030, 5020],
+		"stackTags": ["laravel", "vue", "wordpress"],
+		"websiteUrl": "https://www.agentur-loop.com/",
+		"devjobsProfileUrl": "https://devjobs.at/team/loop-new-media",
+		"logo": ""
+	},
+	{
+		"companyName": "Fredmansky",
+		"teaser": "Fredmansky Werbeagentur",
+		"zipCodes": [4040, 4120, 8200, 1150],
+		"stackTags": ["craftcms", "vue", "wordpress"],
+		"websiteUrl": "https://fredmansky.at/",
+		"devjobsProfileUrl": "https://devjobs.at/team/fredmansky",
+		"logo": ""
+	}
+]
