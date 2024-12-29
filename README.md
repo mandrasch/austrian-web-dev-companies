@@ -20,6 +20,7 @@ Please just open a PR and add the data to `static/companies.json`.
 
 ## TODOs
 
+- [ ] robust data validation for JSON, throw build error
 - [ ] mobile optimization
 - [ ] add selected values to url
 - [ ] pagination

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-
 	import type { Company } from '$lib/types';
 
 	// Receive the companies data from the `load` function via +page.ts
@@ -9,8 +8,6 @@
 
 	// Initially, show all companies
 	let filteredCompanies = $state<Company[]>(data.companies);
-
-	// SORT & FILTER
 
 	// Available technologies to filter by
 	const availablePhpCmses = [
@@ -43,40 +40,13 @@
 	let checkboxGroupsDiv: HTMLDivElement;
 	let selectedStackTags = $state<string[]>([]);
 	let selectedSpecialTags = $state<string[]>([]);
-
-	// TODO: use enum with 'stack' and 'special'
-	// Toggle function to manage selected tags for each group
-	function toggleTag(toggledValue: string, type: string) {
-		// TODO: refactor with better solution
-
-		if (type === 'stack') {
-			if (selectedStackTags.includes(toggledValue)) {
-				selectedStackTags = selectedStackTags.filter((tag) => tag !== toggledValue);
-			} else {
-				selectedStackTags = [...selectedStackTags, toggledValue];
-			}
-		}
-
-		if (type === 'special') {
-			if (selectedSpecialTags.includes(toggledValue)) {
-				selectedSpecialTags = selectedSpecialTags.filter((tag) => tag !== toggledValue);
-			} else {
-				selectedSpecialTags = [...selectedSpecialTags, toggledValue];
-			}
-		}
-
-		applySearchFilters();
-	}
+	let selectedCities = $state([]);
 
 	function resetFilters() {
 		selectedStackTags = [];
 		selectedSpecialTags = [];
+		selectedCities = [];
 		applySearchFilters();
-
-		// TODO: should we use checkbox value binding instead?
-		Array.from(checkboxGroupsDiv.querySelectorAll('input[type="checkbox"]')).forEach((el: any) => {
-			el.checked = false;
-		});
 	}
 
 	// Apply the filters based on selected tags from all groups
@@ -97,38 +67,75 @@
 				selectedSpecialTags.every((tag) => company.specialTags.includes(tag))
 			);
 		}
+
+		if (selectedCities.length > 0) {
+			filteredCompanies = filteredCompanies.filter((company) =>
+				selectedCities.every((city) => company.cities.includes(city))
+			);
+		}
 	}
 </script>
 
 <div class="checkbox-groups" bind:this={checkboxGroupsDiv}>
-	<!-- Checkbox group for filtering by Stack -->
+	<!-- TODO: use bind:group instead of toggleTag() - easier? -->
+
 	<div>
 		<h3>PHP CMSes</h3>
 		{#each availablePhpCmses as { label, value }}
 			<label>
-				<input type="checkbox" onchange={() => toggleTag(value, 'stack')} />
+				<input
+					type="checkbox"
+					{value}
+					bind:group={selectedStackTags}
+					onchange={applySearchFilters}
+				/>
 				{label}
 			</label>
 		{/each}
 	</div>
 
-	<!-- Checkbox group for PHP frameworks -->
-	<div>
-		<h3>PHP Frameworks</h3>
-		{#each availablePhpFrameworks as { label, value }}
-			<label>
-				<input type="checkbox" onchange={() => toggleTag(value, 'stack')} />
-				{label}
-			</label>
-		{/each}
-	</div>
-
-	<!-- Checkbox group for Frontend frameworks -->
 	<div>
 		<h3>JavaScript</h3>
 		{#each availableFrontendFrameworks as { label, value }}
 			<label>
-				<input type="checkbox" onchange={() => toggleTag(value, 'stack')} />
+				<input
+					type="checkbox"
+					{value}
+					bind:group={selectedStackTags}
+					onchange={applySearchFilters}
+				/>
+				{label}
+			</label>
+		{/each}
+	</div>
+
+	<div>
+		<h3>Cities</h3>
+		<div style="max-height:150px; overflow:auto; border:1px solid #333;">
+			{#each data.cityCounts as city (city.city)}
+				<label>
+					<input
+						type="checkbox"
+						value={city.city}
+						bind:group={selectedCities}
+						onchange={applySearchFilters}
+					/>
+					{city.city}
+				</label>
+			{/each}
+		</div>
+	</div>
+
+	<div>
+		<h3>PHP Frameworks</h3>
+		{#each availablePhpFrameworks as { label, value }}
+			<label>
+				<input
+					type="checkbox"
+					{value}
+					bind:group={selectedStackTags}
+					onchange={applySearchFilters}
+				/>
 				{label}
 			</label>
 		{/each}
@@ -138,15 +145,15 @@
 		<h3>Specials</h3>
 		{#each availableSpecialTags as { label, value }}
 			<label>
-				<input type="checkbox" onchange={() => toggleTag(value, 'special')} />
+				<input
+					type="checkbox"
+					{value}
+					bind:group={selectedSpecialTags}
+					onchange={applySearchFilters}
+				/>
 				{label}
 			</label>
 		{/each}
-	</div>
-
-	<div>
-		<h3>Zip Codes</h3>
-		<small>Coming soon ...</small>
 	</div>
 </div>
 
@@ -210,7 +217,8 @@
 							/>
 						</svg>
 					</a> |
-				{/if} Zip: {company.zipCodes.join(', ')} | {company.stackTags.join(', ')}
+				{/if}
+				{company.cities.join(', ')} | {company.stackTags.join(', ')}
 				{#if company.specialTags.includes('fourDayWorkWeek')}
 					| 🪄 4 day work week (or similiar)
 				{/if}
@@ -229,6 +237,7 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 		column-gap: 1rem;
+		row-gap: 1rem;
 
 		h3 {
 			font-size: 1rem;
