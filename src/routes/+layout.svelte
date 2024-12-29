@@ -1,6 +1,6 @@
 <script>
-	// TODO: use npm version and import from node_modules/
-	import '$styles/simple.min.css';
+	// import from node_modules/
+	import 'simpledotcss';
 	import '$styles/global.scss';
 
 	import Header from '$lib/components/Header.svelte';

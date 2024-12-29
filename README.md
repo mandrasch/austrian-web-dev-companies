@@ -20,6 +20,7 @@ Please just open a PR and add the data to `static/companies.json`.
 - [ ] add selected values to url
 - [ ] pagination
 - [ ] add social share image
+- [ ] add seo title and description
 - [ ] add header
 - [ ] add footer
 - [ ] add imprint & privacy
