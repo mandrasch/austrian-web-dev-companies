@@ -14,25 +14,25 @@
 
 	// Available technologies to filter by
 	const availablePhpCmses = [
-		{ label: 'Craft CMS', value: 'craftcms' },
-		{ label: 'Drupal', value: 'drupal' },
-		{ label: 'Kirby CMS', value: 'kirbycms' },
-		{ label: 'TYPO3', value: 'typo3' },
-		{ label: 'WordPress', value: 'wordpress' }
+		{ label: 'Craft CMS', value: 'CraftCMS' },
+		{ label: 'Drupal', value: 'Drupal' },
+		{ label: 'Kirby CMS', value: 'KirbyCMS' },
+		{ label: 'TYPO3', value: 'TYPO3' },
+		{ label: 'WordPress', value: 'WordPress' }
 	];
 
 	// PHP frameworks
 	const availablePhpFrameworks = [
-		{ label: 'Laravel', value: 'laravel' },
-		{ label: 'Symfony', value: 'symfony' }
+		{ label: 'Laravel', value: 'Laravel' },
+		{ label: 'Symfony', value: 'Symfony' }
 	];
 
 	// Frontend frameworks
 	const availableFrontendFrameworks = [
-		{ label: 'Angular', value: 'angular' },
-		{ label: 'React', value: 'react' },
-		{ label: 'Svelte', value: 'svelte' },
-		{ label: 'Vue', value: 'vue' }
+		{ label: 'Angular', value: 'Angular' },
+		{ label: 'React', value: 'React' },
+		{ label: 'Svelte', value: 'Svelte' },
+		{ label: 'Vue', value: 'Vue' }
 	];
 
 	const availableSpecialTags = [
