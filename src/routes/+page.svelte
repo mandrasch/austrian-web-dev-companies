@@ -164,6 +164,7 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
+		align-items: center;
 
 		button {
 			font-size: 1rem;
