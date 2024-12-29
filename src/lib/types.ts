@@ -3,6 +3,7 @@ export interface Company {
 	teaser: string;
 	zipCodes: number[];
 	stackTags: string[];
+	specialTags: string[];
 	websiteUrl: string;
 	devjobsProfileUrl: string;
 	logo: string;

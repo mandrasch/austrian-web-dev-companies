@@ -4,6 +4,7 @@
 		"teaser": "Software- und App-Entwicklung in Wien und Barcelona",
 		"zipCodes": [1010],
 		"stackTags": ["symfony", "angular"],
+		"specialTags": [],
 		"websiteUrl": "https://webmozarts.com/",
 		"devjobsProfileUrl": "https://devjobs.at/team/webmozarts",
 		"logo": ""
@@ -13,6 +14,7 @@
 		"teaser": "LOOP — The fully charged digital powerhouse.",
 		"zipCodes": [1030, 5020],
 		"stackTags": ["laravel", "vue", "wordpress"],
+		"specialTags": ["fourDayWorkWeek"],
 		"websiteUrl": "https://www.agentur-loop.com/",
 		"devjobsProfileUrl": "https://devjobs.at/team/loop-new-media",
 		"logo": ""
@@ -22,6 +24,7 @@
 		"teaser": "Fredmansky Werbeagentur",
 		"zipCodes": [4040, 4120, 8200, 1150],
 		"stackTags": ["craftcms", "vue", "wordpress"],
+		"specialTags": [],
 		"websiteUrl": "https://fredmansky.at/",
 		"devjobsProfileUrl": "https://devjobs.at/team/fredmansky",
 		"logo": ""
