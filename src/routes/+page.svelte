@@ -97,11 +97,6 @@
 				selectedSpecialTags.every((tag) => company.specialTags.includes(tag))
 			);
 		}
-
-		// Sort the filtered companies by companyName (case-insensitive)
-		filteredCompanies.sort((a, b) => {
-			return a.companyName.localeCompare(b.companyName);
-		});
 	}
 </script>
 
