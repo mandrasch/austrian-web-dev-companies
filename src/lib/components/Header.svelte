@@ -4,7 +4,7 @@
 </header>
 
 <a
-	href="https://github.com/mandrasch/austrian-web-dev-map"
+	href="https://github.com/mandrasch/austrian-web-dev-companies"
 	class="github-corner"
 	aria-label="View source on GitHub"
 	><svg
