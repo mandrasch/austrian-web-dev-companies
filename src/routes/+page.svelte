@@ -27,7 +27,14 @@
 	let checkboxGroupsDiv: HTMLDivElement;
 
 	function resetFilters() {
+		// reset state
 		resetSelectedTags();
+
+		// bit hacky, but we couldn't use bind:group in FilterCheckboxes
+		Array.from(checkboxGroupsDiv.querySelectorAll('input[type=checkbox]')).forEach((el) => {
+			let inputEl = el as HTMLInputElement;
+			inputEl.checked = false;
+		});
 	}
 
 	// Apply the filters based on selected tags from all groups
@@ -125,7 +132,7 @@
 	<div class="resultCount">
 		<p style="font-weight: bold;">{filteredCompaniesResult.length} companies found:</p>
 
-		{#if selectedStackTags.get().length > 0 || selectedSpecialTags.get().length > 0}
+		{#if selectedStackTags.get().length > 0 || selectedSpecialTags.get().length > 0 || selectedCities.get().length > 0}
 			<div>
 				<button in:fade={{ delay: 100 }} out:fade onclick={() => resetFilters()}
 					>Reset filters</button
