@@ -1,5 +1,5 @@
 <header>
-	<a href="/"><h1>Austrian Web Dev Map ⛰️ 🇦🇹</h1></a>
+	<a href="/"><h1>Austrian Web Dev Companies ⛰️ 🇦🇹</h1></a>
 	<p>Looking for a job can be tiresome, this map might help (a bit). Good luck!</p>
 </header>
 
