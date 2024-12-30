@@ -2,7 +2,7 @@
 
 Searching for a job can be tiresome, this map might help a bit. Good luck!
 
-Demo: https://austrian-web-dev-map.pages.dev/
+Demo: https://austrian-web-dev-companies.pages.dev/
 
 Hobby project with Svelte v5. 🪄
 
