@@ -20,6 +20,7 @@ Please just open a PR and add the data to `static/companies.json`.
 
 ## TODOs
 
+- [ ] if a filter is set, we should check what else is there in dataset? e.g. which cities? gray out other stuff?
 - [ ] robust data validation for JSON, throw build error
 - [ ] mobile optimization
 - [ ] add selected values to url

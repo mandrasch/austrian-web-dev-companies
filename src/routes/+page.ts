@@ -27,7 +27,7 @@ export const load: PageLoad = async ({ fetch }) => {
 
 	// Convert cityCountMap to an array of objects and sort by count
 	const cityCounts = Object.entries(cityCountMap)
-		.map(([city, count]) => ({ city, count })) // Create an array of objects { city, count }
+		.map(([city, count]) => ({ label: city, value: city, count })) // Create an array of objects
 		.sort((a, b) => b.count - a.count); // Sort by count in descending order
 
 	return {

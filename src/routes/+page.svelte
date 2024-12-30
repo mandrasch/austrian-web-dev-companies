@@ -2,75 +2,60 @@
 	import { fade } from 'svelte/transition';
 	import type { Company } from '$lib/types';
 
+	import { availableFilterValues } from '$lib/shared';
+
+	import {
+		selectedStackTags,
+		selectedSpecialTags,
+		selectedCities,
+		resetSelectedTags
+	} from '$lib/state.svelte';
+
 	// Receive the companies data from the `load` function via +page.ts
 	import type { PageData } from './$types';
+	import FilterCheckboxes from '$lib/components/FilterCheckboxes.svelte';
 	let { data }: { data: PageData } = $props();
 
+	// TODO: move this to global state to import it into components
 	// Initially, show all companies
 	let filteredCompanies = $state<Company[]>(data.companies);
 
-	// Available technologies to filter by
-	const availablePhpCmses = [
-		{ label: 'Craft CMS', value: 'CraftCMS' },
-		{ label: 'Drupal', value: 'Drupal' },
-		{ label: 'Kirby CMS', value: 'KirbyCMS' },
-		{ label: 'TYPO3', value: 'TYPO3' },
-		{ label: 'WordPress', value: 'WordPress' }
-	];
-
-	// PHP frameworks
-	const availablePhpFrameworks = [
-		{ label: 'Laravel', value: 'Laravel' },
-		{ label: 'Symfony', value: 'Symfony' }
-	];
-
-	// Frontend frameworks
-	const availableFrontendFrameworks = [
-		{ label: 'Angular', value: 'Angular' },
-		{ label: 'React', value: 'React' },
-		{ label: 'Svelte', value: 'Svelte' },
-		{ label: 'Vue', value: 'Vue' }
-	];
-
-	const availableSpecialTags = [
-		{ label: '4 day work week (or similiar)', value: 'fourDayWorkWeek' }
-	];
-
 	// Reactive state for selected tags
 	let checkboxGroupsDiv: HTMLDivElement;
-	let selectedStackTags = $state<string[]>([]);
-	let selectedSpecialTags = $state<string[]>([]);
-	let selectedCities = $state([]);
 
 	function resetFilters() {
-		selectedStackTags = [];
-		selectedSpecialTags = [];
-		selectedCities = [];
-		applySearchFilters();
+		resetSelectedTags();
 	}
+
+	// TODO: is this the proper way to check if global state (selectedStackTags e.g.) has changed?
+	$effect(() => {
+		console.log('$effect triggered, $state changed ...');
+		applySearchFilters();
+	});
 
 	// Apply the filters based on selected tags from all groups
 	function applySearchFilters() {
-		if (selectedStackTags.length === 0) {
+		console.log('applySearchFilters() triggered ...');
+		if (selectedStackTags.get().length === 0) {
 			// If no tags are selected, show all companies
 			filteredCompanies = data.companies;
 		} else {
 			// Filter companies based on the combined stack tags
 			filteredCompanies = data.companies.filter((company) =>
-				selectedStackTags.every((tag) => company.stackTags.includes(tag))
+				selectedStackTags.get().every((tag) => company.stackTags.includes(tag))
 			);
 		}
 
-		if (selectedSpecialTags.length > 0) {
+		if (selectedSpecialTags.get().length > 0) {
 			// Filter companies based on the special tags
 			filteredCompanies = filteredCompanies.filter((company) =>
-				selectedSpecialTags.every((tag) => company.specialTags.includes(tag))
+				selectedSpecialTags.get().every((tag) => company.specialTags.includes(tag))
 			);
 		}
 
-		if (selectedCities.length > 0) {
+		if (selectedCities.get().length > 0) {
 			filteredCompanies = filteredCompanies.filter((company) =>
-				selectedCities.every((city) => company.cities.includes(city))
+				selectedCities.get().every((city) => company.cities.includes(city))
 			);
 		}
 	}
@@ -79,9 +64,10 @@
 <div class="checkbox-groups" bind:this={checkboxGroupsDiv}>
 	<!-- TODO: use bind:group instead of toggleTag() - easier? -->
 
+	<!-- {JSON.stringify(selectedStackTags.get())} -->
 	<div>
 		<h3>PHP CMSes</h3>
-		{#each availablePhpCmses as { label, value }}
+		<!-- {#each availablePhpCmses as { label, value }}
 			<label>
 				<input
 					type="checkbox"
@@ -91,69 +77,42 @@
 				/>
 				{label}
 			</label>
-		{/each}
+		{/each} -->
+		<FilterCheckboxes
+			labelsAndValues={availableFilterValues.phpCmses}
+			stateVariable={selectedStackTags}
+		/>
 	</div>
 
 	<div>
 		<h3>JavaScript</h3>
-		{#each availableFrontendFrameworks as { label, value }}
-			<label>
-				<input
-					type="checkbox"
-					{value}
-					bind:group={selectedStackTags}
-					onchange={applySearchFilters}
-				/>
-				{label}
-			</label>
-		{/each}
+		<FilterCheckboxes
+			labelsAndValues={availableFilterValues.frontendFrameworks}
+			stateVariable={selectedStackTags}
+		/>
 	</div>
 
 	<div>
 		<h3>Cities</h3>
-		<div style="max-height:150px; overflow:auto; border:1px solid #333;">
-			{#each data.cityCounts as city (city.city)}
-				<label>
-					<input
-						type="checkbox"
-						value={city.city}
-						bind:group={selectedCities}
-						onchange={applySearchFilters}
-					/>
-					{city.city}
-				</label>
-			{/each}
-		</div>
+
+		<FilterCheckboxes labelsAndValues={data.cityCounts} stateVariable={selectedCities} />
 	</div>
 
 	<div>
 		<h3>PHP Frameworks</h3>
-		{#each availablePhpFrameworks as { label, value }}
-			<label>
-				<input
-					type="checkbox"
-					{value}
-					bind:group={selectedStackTags}
-					onchange={applySearchFilters}
-				/>
-				{label}
-			</label>
-		{/each}
+		<FilterCheckboxes
+			labelsAndValues={availableFilterValues.phpFrameworks}
+			stateVariable={selectedStackTags}
+		/>
 	</div>
 
 	<div style="grid-column: span 2;">
 		<h3>Specials</h3>
-		{#each availableSpecialTags as { label, value }}
-			<label>
-				<input
-					type="checkbox"
-					{value}
-					bind:group={selectedSpecialTags}
-					onchange={applySearchFilters}
-				/>
-				{label}
-			</label>
-		{/each}
+
+		<FilterCheckboxes
+			labelsAndValues={availableFilterValues.specialTags}
+			stateVariable={selectedSpecialTags}
+		/>
 	</div>
 </div>
 
@@ -165,7 +124,7 @@
 	<div class="resultCount">
 		<p style="font-weight: bold;">{filteredCompanies.length} companies found:</p>
 
-		{#if selectedStackTags.length > 0 || selectedSpecialTags.length > 0}
+		{#if selectedStackTags.get().length > 0 || selectedSpecialTags.get().length > 0}
 			<div>
 				<button in:fade={{ delay: 100 }} out:fade onclick={() => resetFilters()}
 					>Reset filters</button
