@@ -18,7 +18,10 @@
 
 	// TODO: move this to global state to import it into components
 	// Initially, show all companies
-	let filteredCompanies = $state<Company[]>(data.companies);
+	// let filteredCompanies = $state<Company[]>(data.companies);
+
+	// this depends on $state of selectedStackTags, etc. - therefore dervice
+	let filteredCompaniesResult = $derived(applySearchFilters());
 
 	// Reactive state for selected tags
 	let checkboxGroupsDiv: HTMLDivElement;
@@ -27,14 +30,10 @@
 		resetSelectedTags();
 	}
 
-	// TODO: is this the proper way to check if global state (selectedStackTags e.g.) has changed?
-	$effect(() => {
-		console.log('$effect triggered, $state changed ...');
-		applySearchFilters();
-	});
-
 	// Apply the filters based on selected tags from all groups
 	function applySearchFilters() {
+		let filteredCompanies = [];
+
 		console.log('applySearchFilters() triggered ...');
 		if (selectedStackTags.get().length === 0) {
 			// If no tags are selected, show all companies
@@ -58,6 +57,8 @@
 				selectedCities.get().every((city) => company.cities.includes(city))
 			);
 		}
+
+		return filteredCompanies;
 	}
 </script>
 
@@ -122,7 +123,7 @@
 
 <div>
 	<div class="resultCount">
-		<p style="font-weight: bold;">{filteredCompanies.length} companies found:</p>
+		<p style="font-weight: bold;">{filteredCompaniesResult.length} companies found:</p>
 
 		{#if selectedStackTags.get().length > 0 || selectedSpecialTags.get().length > 0}
 			<div>
@@ -133,7 +134,7 @@
 		{/if}
 	</div>
 
-	{#each filteredCompanies as company (company.companyName)}
+	{#each filteredCompaniesResult as company (company.companyName)}
 		<article>
 			<h3>{company.companyName}</h3>
 			<p>{company.teaser}</p>
