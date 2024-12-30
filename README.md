@@ -20,20 +20,21 @@ Please just open a PR and add the data to `static/companies.json`.
 
 ## TODOs
 
-- [ ] if a filter is set, we should check what else is there in dataset? e.g. which cities? gray out other stuff?
-- [ ] robust data validation for JSON, throw build error
+- [ ] create <ResultList /> component
+- [ ] store selected tags in URL
+- [ ] bonus: if a filter is set, we should check what else is there in dataset? e.g. which cities? gray out other stuff?
+- [ ] robust data validation for JSON, throw build error for unexpected values (currently everything is casesensitive)
 - [ ] mobile optimization
-- [ ] add selected values to url
 - [ ] pagination
 - [ ] add social share image
-- [ ] add seo title and description
-- [ ] add header
+- [x] add seo title and description
+- [x] add header
 - [ ] add footer
 - [ ] add imprint & privacy
 - [ ] isolate functions in components
-- [ ] add NodeJS CMS like strapi, directus
+- [ ] add NodeJS CMS like strapi, directus (?)
 - [ ] a11y check
-- [ ] GitHub corner
+- [x] GitHub corner
 
 ## Thanks to ...
 
