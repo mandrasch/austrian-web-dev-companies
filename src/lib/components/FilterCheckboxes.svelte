@@ -6,11 +6,14 @@
 		const inputEl = event.target as HTMLInputElement;
 
 		if (inputEl.checked) {
-			stateVariable.addTag(inputEl.value);
+			// TODO: check if already there
+			stateVariable.selectedValues.push(inputEl.value);
 			return;
 		}
 
-		stateVariable.removeTag(inputEl.value);
+		stateVariable.selectedValues = stateVariable.selectedValues.filter(
+			(currentValue: string) => currentValue !== inputEl.value
+		);
 	}
 </script>
 

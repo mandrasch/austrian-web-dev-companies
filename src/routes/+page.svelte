@@ -5,9 +5,9 @@
 	import { availableFilterValues } from '$lib/shared';
 
 	import {
-		selectedStackTags,
-		selectedSpecialTags,
-		selectedCities,
+		stackTagsState,
+		specialTagsState,
+		citiesState,
 		resetSelectedTags
 	} from '$lib/state.svelte';
 
@@ -42,26 +42,26 @@
 		let filteredCompanies = [];
 
 		console.log('applySearchFilters() triggered ...');
-		if (selectedStackTags.get().length === 0) {
+		if (stackTagsState.selectedValues.length === 0) {
 			// If no tags are selected, show all companies
 			filteredCompanies = data.companies;
 		} else {
 			// Filter companies based on the combined stack tags
 			filteredCompanies = data.companies.filter((company) =>
-				selectedStackTags.get().every((tag) => company.stackTags.includes(tag))
+				stackTagsState.selectedValues.every((tag) => company.stackTags.includes(tag))
 			);
 		}
 
-		if (selectedSpecialTags.get().length > 0) {
+		if (specialTagsState.selectedValues.length > 0) {
 			// Filter companies based on the special tags
 			filteredCompanies = filteredCompanies.filter((company) =>
-				selectedSpecialTags.get().every((tag) => company.specialTags.includes(tag))
+				specialTagsState.selectedValues.every((tag) => company.specialTags.includes(tag))
 			);
 		}
 
-		if (selectedCities.get().length > 0) {
+		if (citiesState.selectedValues.length > 0) {
 			filteredCompanies = filteredCompanies.filter((company) =>
-				selectedCities.get().every((city) => company.cities.includes(city))
+				citiesState.selectedValues.every((city) => company.cities.includes(city))
 			);
 		}
 
@@ -88,7 +88,7 @@
 		{/each} -->
 		<FilterCheckboxes
 			labelsAndValues={availableFilterValues.phpCmses}
-			stateVariable={selectedStackTags}
+			stateVariable={stackTagsState}
 		/>
 	</div>
 
@@ -96,21 +96,21 @@
 		<h3>JavaScript</h3>
 		<FilterCheckboxes
 			labelsAndValues={availableFilterValues.frontendFrameworks}
-			stateVariable={selectedStackTags}
+			stateVariable={stackTagsState}
 		/>
 	</div>
 
 	<div>
 		<h3>Cities</h3>
 
-		<FilterCheckboxes labelsAndValues={data.cityCounts} stateVariable={selectedCities} />
+		<FilterCheckboxes labelsAndValues={data.cityCounts} stateVariable={citiesState} />
 	</div>
 
 	<div>
 		<h3>PHP Frameworks</h3>
 		<FilterCheckboxes
 			labelsAndValues={availableFilterValues.phpFrameworks}
-			stateVariable={selectedStackTags}
+			stateVariable={stackTagsState}
 		/>
 	</div>
 
@@ -119,7 +119,7 @@
 
 		<FilterCheckboxes
 			labelsAndValues={availableFilterValues.specialTags}
-			stateVariable={selectedSpecialTags}
+			stateVariable={specialTagsState}
 		/>
 	</div>
 </div>
@@ -132,7 +132,7 @@
 	<div class="resultCount">
 		<p style="font-weight: bold;">{filteredCompaniesResult.length} companies found:</p>
 
-		{#if selectedStackTags.get().length > 0 || selectedSpecialTags.get().length > 0 || selectedCities.get().length > 0}
+		{#if stackTagsState.selectedValues.length > 0 || specialTagsState.selectedValues.length > 0 || citiesState.selectedValues.length > 0}
 			<div>
 				<button in:fade={{ delay: 100 }} out:fade onclick={() => resetFilters()}
 					>Reset filters</button

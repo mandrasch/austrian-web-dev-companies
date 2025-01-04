@@ -20,7 +20,8 @@ Please just open a PR and add the data to `static/companies.json`.
 
 ## TODOs
 
-- [ ] create <ResultList /> component
+- [x] remove custom class, object is enough for simplicity - https://svelte.dev/playground/17af110213b9434d95dff6ae2e62c100?version=5.16.0
+- [ ] create <ResultList /> component, https://svelte.dev/playground/17af110213b9434d95dff6ae2e62c100?version=5.16.0
 - [ ] store selected tags in URL
 - [ ] bonus: if a filter is set, we should check what else is there in dataset? e.g. which cities? gray out other stuff?
 - [ ] robust data validation for JSON, throw build error for unexpected values (currently everything is casesensitive)
