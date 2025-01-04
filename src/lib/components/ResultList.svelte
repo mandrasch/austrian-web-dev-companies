@@ -10,6 +10,7 @@
 		stackTagsState,
 		specialTagsState,
 		citiesState,
+		searchTextState,
 		resetSelectedTags
 	} from '$lib/state.svelte';
 
@@ -42,6 +43,14 @@
 			);
 		}
 
+		if (searchTextState.text !== '') {
+			const searchTextLower = searchTextState.text.toLowerCase();
+			filteredCompanies = filteredCompanies.filter(
+				(company: Company) =>
+					company.companyName.toLowerCase().includes(searchTextLower) ||
+					company.teaser.toLowerCase().includes(searchTextLower)
+			);
+		}
 		return filteredCompanies;
 	});
 
@@ -55,7 +64,8 @@
 	<div class="resultCount">
 		<p style="font-weight: bold;">{filteredCompaniesResult.length} companies found:</p>
 
-		{#if stackTagsState.selectedValues.length > 0 || specialTagsState.selectedValues.length > 0 || citiesState.selectedValues.length > 0}
+		<!-- TODO find easier way to check if filters are set, derived? -->
+		{#if stackTagsState.selectedValues.length > 0 || specialTagsState.selectedValues.length > 0 || citiesState.selectedValues.length > 0 || searchTextState.text != ''}
 			<div>
 				<button in:fade={{ delay: 100 }} out:fade onclick={() => resetFilters()}
 					>Reset filters</button

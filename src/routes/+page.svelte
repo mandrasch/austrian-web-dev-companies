@@ -1,10 +1,16 @@
 <script lang="ts">
 	import FilterCheckboxes from '$lib/components/FilterCheckboxes.svelte';
+	import FilterTextInput from '$lib/components/FilterTextInput.svelte';
 	import ResultList from '$lib/components/ResultList.svelte';
 
 	import { availableFilterValues } from '$lib/shared';
 
-	import { stackTagsState, specialTagsState, citiesState } from '$lib/state.svelte';
+	import {
+		stackTagsState,
+		specialTagsState,
+		citiesState,
+		searchTextState
+	} from '$lib/state.svelte';
 
 	// Receive the companies data from the `load` function via +page.ts
 	import type { PageData } from './$types';
@@ -48,12 +54,21 @@
 		/>
 	</div>
 
-	<div style="grid-column: span 2;">
+	<div>
 		<h3>Specials</h3>
 		<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
 		<FilterCheckboxes
 			labelsAndValues={availableFilterValues.specialTags}
 			bind:statePropToBind={specialTagsState.selectedValues}
+		/>
+	</div>
+
+	<div>
+		<h3>Search Text</h3>
+		<FilterTextInput
+			label="Search for text"
+			bind:statePropToBind={searchTextState.text}
+			placeholder="Search term ..."
 		/>
 	</div>
 </div>

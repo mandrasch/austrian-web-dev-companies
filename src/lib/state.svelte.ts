@@ -1,12 +1,19 @@
+// See https://dev.to/mandrasch/svelte-5-share-state-between-components-for-dummies-4gd2
+
+// Tag based states
 // If you want to use it as import, you need to wrap the array into an Object
 export const stackTagsState = $state({ selectedValues: [] });
 export const specialTagsState = $state({ selectedValues: [] });
 export const citiesState = $state({ selectedValues: [] });
 
+// Text state
+export const searchTextState = $state({ text: '' });
+
 export function resetSelectedTags() {
 	stackTagsState.selectedValues = [];
 	specialTagsState.selectedValues = [];
 	citiesState.selectedValues = [];
+	searchTextState.text = '';
 }
 
 // You could also use a custom class to centralize logic parts, not done here for simplicity

@@ -1,7 +1,10 @@
 <script lang="ts">
-	// stateVariable = the state which should be updated when checkboxes are selected,
-	// important: use $bindable, otherwise this won't work
-	let { labelsAndValues, statePropToBind = $bindable() } = $props();
+	let {
+		labelsAndValues,
+		// statePropToBind = the state which should be updated when checkboxes are selected,
+		// important: use $bindable, otherwise this won't work
+		statePropToBind = $bindable()
+	} = $props();
 </script>
 
 {#each labelsAndValues as { label, value }}
