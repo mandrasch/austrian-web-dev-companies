@@ -17,5 +17,5 @@ export const availableFilterValues = {
 		{ label: 'Svelte', value: 'Svelte' },
 		{ label: 'Vue', value: 'Vue' }
 	],
-	specialTags: [{ label: '4 day work week (or similiar)', value: 'fourDayWorkWeek' }]
+	specialTags: [{ label: '4 day work week (or similiar)', value: 'fourDayWorkWeekOrSimiliar' }]
 };

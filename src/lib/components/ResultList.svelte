@@ -119,7 +119,7 @@
 					</a> |
 				{/if}
 				{company.cities.join(', ')} | {company.stackTags.join(', ')}
-				{#if company.specialTags.includes('fourDayWorkWeek')}
+				{#if company.specialTags.includes('fourDayWorkWeekOrSimiliar')}
 					| 🪄 4 day work week (or similiar)
 				{/if}
 			</p>

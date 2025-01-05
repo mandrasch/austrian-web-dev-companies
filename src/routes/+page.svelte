@@ -42,6 +42,7 @@
 		<FilterCheckboxes
 			labelsAndValues={data.cityCounts}
 			bind:statePropToBind={citiesState.selectedValues}
+			style="max-height:175px; overflow:scroll"
 		/>
 	</div>
 

@@ -6,5 +6,4 @@ export interface Company {
 	specialTags: string[];
 	websiteUrl: string;
 	devjobsProfileUrl: string;
-	logo: string;
 }

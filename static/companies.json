@@ -6,18 +6,16 @@
 		"stackTags": ["Symfony", "Angular"],
 		"specialTags": [],
 		"websiteUrl": "https://webmozarts.com/",
-		"devjobsProfileUrl": "https://devjobs.at/team/webmozarts",
-		"logo": ""
+		"devjobsProfileUrl": "https://devjobs.at/team/webmozarts"
 	},
 	{
 		"companyName": "LOOP New Media",
 		"teaser": "LOOP — The fully charged digital powerhouse.",
 		"cities": ["Wien", "Salzburg"],
 		"stackTags": ["Laravel", "Vue", "WordPress"],
-		"specialTags": ["fourDayWorkWeek"],
+		"specialTags": ["fourDayWorkWeekOrSimiliar"],
 		"websiteUrl": "https://www.agentur-loop.com/",
-		"devjobsProfileUrl": "https://devjobs.at/team/loop-new-media",
-		"logo": ""
+		"devjobsProfileUrl": "https://devjobs.at/team/loop-new-media"
 	},
 	{
 		"companyName": "Fredmansky",
@@ -26,8 +24,7 @@
 		"stackTags": ["CraftCMS", "Vue", "WordPress"],
 		"specialTags": [],
 		"websiteUrl": "https://fredmansky.at/",
-		"devjobsProfileUrl": "https://devjobs.at/team/fredmansky",
-		"logo": ""
+		"devjobsProfileUrl": "https://devjobs.at/team/fredmansky"
 	},
 	{
 		"companyName": "Navax Unternehmensgruppe",
@@ -36,8 +33,7 @@
 		"stackTags": ["Svelte"],
 		"specialTags": [],
 		"websiteUrl": "https://www.navax.com",
-		"devjobsProfileUrl": "https://devjobs.at/team/navax-unternehmensgruppe",
-		"logo": ""
+		"devjobsProfileUrl": "https://devjobs.at/team/navax-unternehmensgruppe"
 	},
 	{
 		"companyName": "Holzweg",
@@ -46,7 +42,33 @@
 		"stackTags": ["TYPO3", "WordPress", "React", "Svelte", "Vue"],
 		"specialTags": [],
 		"websiteUrl": "https://www.navax.com",
-		"devjobsProfileUrl": "https://devjobs.at/team/navax-unternehmensgruppe",
-		"logo": ""
+		"devjobsProfileUrl": "https://devjobs.at/team/navax-unternehmensgruppe"
+	},
+	{
+		"companyName": "STRABAG AG",
+		"teaser": "",
+		"cities": ["Spittal/Drau", "Villach", "Linz", "Wien"],
+		"stackTags": ["Vue"],
+		"specialTags": [],
+		"websiteUrl": "https://www.strabag.at/",
+		"devjobsProfileUrl": "https://devjobs.at/team/strabag-ag"
+	},
+	{
+		"companyName": "Digitalwerk",
+		"teaser": "Deine Digitale Marketing Agentur in Wien",
+		"cities": ["Wien"],
+		"stackTags": ["TYPO3", "WordPress"],
+		"specialTags": ["fourDayWorkWeekOrSimiliar"],
+		"websiteUrl": "https://www.digitalwerk.agency/",
+		"devjobsProfileUrl": ""
+	},
+	{
+		"companyName": "Ahoi Kapptn!",
+		"teaser": "App Entwicklung in Linz | Wien | Österreich",
+		"cities": ["Linz", "Wien"],
+		"stackTags": ["React"],
+		"specialTags": [""],
+		"websiteUrl": "https://ahoikapptn.com/",
+		"devjobsProfileUrl": "https://devjobs.at/team/ahoi-kapptn"
 	}
 ]
