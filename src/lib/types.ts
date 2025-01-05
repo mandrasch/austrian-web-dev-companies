@@ -5,5 +5,5 @@ export interface Company {
 	stackTags: string[];
 	specialTags: string[];
 	websiteUrl: string;
-	devjobsProfileUrl: string;
+	devjobsAtIdentifier: string;
 }

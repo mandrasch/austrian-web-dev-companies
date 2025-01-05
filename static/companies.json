@@ -6,7 +6,7 @@
 		"stackTags": ["Symfony", "Angular"],
 		"specialTags": [],
 		"websiteUrl": "https://webmozarts.com/",
-		"devjobsProfileUrl": "https://devjobs.at/team/webmozarts"
+		"devjobsAtIdentifier": "webmozarts"
 	},
 	{
 		"companyName": "LOOP New Media",
@@ -15,7 +15,7 @@
 		"stackTags": ["Laravel", "Vue", "WordPress"],
 		"specialTags": ["fourDayWorkWeekOrSimiliar"],
 		"websiteUrl": "https://www.agentur-loop.com/",
-		"devjobsProfileUrl": "https://devjobs.at/team/loop-new-media"
+		"devjobsAtIdentifier": "loop-new-media"
 	},
 	{
 		"companyName": "Fredmansky",
@@ -24,7 +24,7 @@
 		"stackTags": ["CraftCMS", "Vue", "WordPress"],
 		"specialTags": [],
 		"websiteUrl": "https://fredmansky.at/",
-		"devjobsProfileUrl": "https://devjobs.at/team/fredmansky"
+		"devjobsAtIdentifier": "fredmansky"
 	},
 	{
 		"companyName": "Navax Unternehmensgruppe",
@@ -33,7 +33,7 @@
 		"stackTags": ["Svelte"],
 		"specialTags": [],
 		"websiteUrl": "https://www.navax.com",
-		"devjobsProfileUrl": "https://devjobs.at/team/navax-unternehmensgruppe"
+		"devjobsAtIdentifier": "navax-unternehmensgruppe"
 	},
 	{
 		"companyName": "Holzweg",
@@ -42,7 +42,7 @@
 		"stackTags": ["TYPO3", "WordPress", "React", "Svelte", "Vue"],
 		"specialTags": [],
 		"websiteUrl": "https://www.holzweg.com",
-		"devjobsProfileUrl": "https://devjobs.at/jobs/holzweg-gmbh"
+		"devjobsAtIdentifier": "holzweg-gmbh"
 	},
 	{
 		"companyName": "STRABAG AG",
@@ -51,7 +51,7 @@
 		"stackTags": ["Vue"],
 		"specialTags": [],
 		"websiteUrl": "https://www.strabag.at/",
-		"devjobsProfileUrl": "https://devjobs.at/team/strabag-ag"
+		"devjobsAtIdentifier": "strabag-ag"
 	},
 	{
 		"companyName": "Digitalwerk",
@@ -60,7 +60,7 @@
 		"stackTags": ["TYPO3", "WordPress"],
 		"specialTags": ["fourDayWorkWeekOrSimiliar"],
 		"websiteUrl": "https://www.digitalwerk.agency/",
-		"devjobsProfileUrl": ""
+		"devjobsAtIdentifier": "digitalwerk-gmbh"
 	},
 	{
 		"companyName": "Ahoi Kapptn!",
@@ -69,6 +69,6 @@
 		"stackTags": ["React"],
 		"specialTags": [""],
 		"websiteUrl": "https://ahoikapptn.com/",
-		"devjobsProfileUrl": "https://devjobs.at/team/ahoi-kapptn"
+		"devjobsAtIdentifier": "ahoi-kapptn"
 	}
 ]
