@@ -77,6 +77,9 @@
 		if (selectedCities) params.set('cities', selectedCities);
 		if (searchText) params.set('s', searchText);
 
+		// Important reset pagination state
+		paginationState.currentPage = 1;
+
 		// Trigger a page load with new query parameters
 		goto(`?${params.toString()}`, { replaceState: true });
 	});

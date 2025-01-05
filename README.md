@@ -28,10 +28,11 @@ If you want to remove your company, please just send me a quick note: matthias-a
 
 ## TODOs
 
+- [ ] debounce for search text input / use onchange
 - [ ] pagination (https://www.youtube.com/watch?v=G-tafjJzfQo), but with v5
 - [ ] store selected tags in URL (state)
 - [ ] move filters into own component
-- [ ] optimize mobile
+- [x] optimize mobile
 - [ ] toggle filter view
 - [ ] bonus: add statistics page with overview of used technology
 - [x] remove custom class, object is enough for simplicity - https://svelte.dev/playground/17af110213b9434d95dff6ae2e62c100?version=5.16.0
