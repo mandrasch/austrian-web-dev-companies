@@ -3,8 +3,9 @@
 	import { fade } from 'svelte/transition';
 	import type { Company } from '$lib/types';
 
-	// TODO: add type hinting
-	let { companiesData, total, limit, currentPage } = $props();
+	// all JSON companies
+	let { companiesData } = $props();
+	let total = 0;
 
 	// import shared state
 	import {
@@ -12,37 +13,38 @@
 		specialTagsState,
 		citiesState,
 		searchTextState,
+		paginationState,
 		resetSelectedTags
 	} from '$lib/state.svelte';
 
 	// Listen for state changes
 	// Apply the filters based on selected tags from all groups
-	/*let filteredCompaniesResult = $derived.by(() => {
-		let filteredCompanies: Company[] = [];
-
+	let results = $derived.by(() => {
 		console.log('applySearchFilters() triggered ...');
 
-		filteredCompanies = companiesData.companies;
+		// start fresh
+		let filteredCompanies: Company[] = [];
+		filteredCompanies = companiesData;
 
 		// Very verbose here, could be refactored - but keeping it simple here
 
 		if (stackTagsState.selectedJavaScriptFrameworks.length > 0) {
 			// Filter companies based on the combined stack tags
-			filteredCompanies = companiesData.companies.filter((company: Company) =>
+			filteredCompanies = filteredCompanies.filter((company: Company) =>
 				stackTagsState.selectedJavaScriptFrameworks.every((tag) => company.stackTags.includes(tag))
 			);
 		}
 
 		if (stackTagsState.selectedPhpCmses.length > 0) {
 			// Filter companies based on the combined stack tags
-			filteredCompanies = companiesData.companies.filter((company: Company) =>
+			filteredCompanies = filteredCompanies.filter((company: Company) =>
 				stackTagsState.selectedPhpCmses.every((tag) => company.stackTags.includes(tag))
 			);
 		}
 
 		if (stackTagsState.selectedPhpFrameworks.length > 0) {
 			// Filter companies based on the combined stack tags
-			filteredCompanies = companiesData.companies.filter((company: Company) =>
+			filteredCompanies = filteredCompanies.filter((company: Company) =>
 				stackTagsState.selectedPhpFrameworks.every((tag) => company.stackTags.includes(tag))
 			);
 		}
@@ -68,14 +70,30 @@
 					company.teaser.toLowerCase().includes(searchTextLower)
 			);
 		}
-		return filteredCompanies;
+
+		console.log({ filteredCompanies });
+		console.log({ paginationState });
+
+		// Filtering is done, let's paginate!
+		const startIndex = (paginationState.currentPage - 1) * paginationState.limit;
+		const paginatedCompanies = filteredCompanies.slice(
+			startIndex,
+			startIndex + paginationState.limit
+		);
+
+		return { companies: paginatedCompanies, total: filteredCompanies.length };
 	});
+
+	// TODO:
+
+	/* TOOD: use pagination state
+	
 	*/
 
 	function updateUrl() {
 		// Get the current search parameters from the URL, set new current page for pagination
 		const searchParams = new URLSearchParams(window.location.search);
-		searchParams.set('p', currentPage.toString());
+		searchParams.set('p', paginationState.currentPage.toString());
 		goto(`?${searchParams.toString()}`, { replaceState: true });
 	}
 
@@ -86,7 +104,7 @@
 
 <div>
 	<div class="resultCount">
-		<p style="font-weight: bold;">{total} companies found:</p>
+		<p style="font-weight: bold;">{results.total} companies found:</p>
 
 		<!-- TODO find easier way to check if filters are set, derived? -->
 		{#if stackTagsState.selectedJavaScriptFrameworks.length > 0 || stackTagsState.selectedPhpCmses.length > 0 || stackTagsState.selectedPhpFrameworks.length > 0 || specialTagsState.selectedValues.length > 0 || citiesState.selectedValues.length > 0 || searchTextState.text != ''}
@@ -98,7 +116,7 @@
 		{/if}
 	</div>
 
-	{#each companiesData as company (company.companyName)}
+	{#each results.companies as company (company.companyName)}
 		<article>
 			<h3>{company.companyName}</h3>
 			<p>{company.teaser}</p>
@@ -176,18 +194,18 @@
 	{/each}
 
 	<div class="pagination">
-		{#if currentPage > 1}
+		{#if paginationState.currentPage > 1}
 			<button
 				onclick={() => {
-					currentPage--;
+					paginationState.currentPage--;
 					updateUrl();
 				}}>Previous</button
 			>
 		{/if}
-		{#if currentPage * limit < total}
+		{#if paginationState.currentPage * paginationState.limit < results.total}
 			<button
 				onclick={() => {
-					currentPage++;
+					paginationState.currentPage++;
 					updateUrl();
 				}}>Next</button
 			>

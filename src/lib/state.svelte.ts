@@ -15,6 +15,9 @@ export const citiesState = $state({ selectedValues: [] as string[] });
 // Text state
 export const searchTextState = $state({ text: '' });
 
+// Pagination state
+export const paginationState = $state({ currentPage: 1, limit: 5 });
+
 export function resetSelectedTags() {
 	stackTagsState.selectedPhpCmses = [];
 	stackTagsState.selectedPhpFrameworks = [];

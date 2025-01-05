@@ -18,7 +18,8 @@
 		stackTagsState,
 		specialTagsState,
 		citiesState,
-		searchTextState
+		searchTextState,
+		paginationState
 	} from '$lib/state.svelte';
 
 	// TODO: is onMount the right thing for this?
@@ -26,15 +27,29 @@
 		console.log('the component has mounted');
 
 		// On page load, we need to set filter state from URL params
+		const searchParams = new URLSearchParams(window.location.search);
 
-		stackTagsState.selectedPhpCmses = data.url.searchParams.get('phpCmses')?.split(',') || [];
-		stackTagsState.selectedPhpFrameworks =
-			data.url.searchParams.get('phpFrameworks')?.split(',') || [];
+		// Get URL params
+		/*const limit = parseInt(searchParams.get('l') || '5', 10);
+		const currentPage = parseInt(searchParams.get('p') || '1', 10);
+		const selectedPhpCmses = searchParams.get('phpCmses')?.split(',') || [];
+		const selectedPhpFrameworks = searchParams.get('phpFrameworks')?.split(',') || [];
+		const selectedJavaScriptFrameworks = searchParams.get('jsFrameworks')?.split(',') || [];
+		const selectedSpecialTags = searchParams.get('specialTags')?.split(',') || [];
+		const selectedCities = searchParams.get('cities')?.split(',') || [];
+		const searchText = searchParams.get('s')?.toLowerCase() || '';*/
+
+		// Set state
+		stackTagsState.selectedPhpCmses = searchParams.get('phpCmses')?.split(',') || [];
+		stackTagsState.selectedPhpFrameworks = searchParams.get('phpFrameworks')?.split(',') || [];
 		stackTagsState.selectedJavaScriptFrameworks =
-			data.url.searchParams.get('jsFrameworks')?.split(',') || [];
-		specialTagsState.selectedValues = data.url.searchParams.get('specialTags')?.split(',') || [];
-		citiesState.selectedValues = data.url.searchParams.get('cities')?.split(',') || [];
-		searchTextState.text = data.url.searchParams.get('s') || '';
+			searchParams.get('jsFrameworks')?.split(',') || [];
+		specialTagsState.selectedValues = searchParams.get('specialTags')?.split(',') || [];
+		citiesState.selectedValues = searchParams.get('cities')?.split(',') || [];
+		searchTextState.text = searchParams.get('s') || '';
+
+		paginationState.currentPage = parseInt(searchParams.get('p') || '1', 10);
+		// TODO: add limit ?l
 	});
 
 	// Listen for state changes, update URL params
@@ -126,12 +141,7 @@
 	</div>
 </div>
 
-<ResultList
-	companiesData={data.companies}
-	total={data.total}
-	limit={data.limit}
-	currentPage={data.currentPage}
-/>
+<ResultList companiesData={data.companies} />
 
 <style lang="scss">
 	/* enable container queries */
