@@ -17,67 +17,76 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
-<div class="checkbox-groups">
-	<div>
-		<h3>PHP CMSes</h3>
-		<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
-		<FilterCheckboxes
-			labelsAndValues={availableFilterValues.phpCmses}
-			bind:statePropToBind={stackTagsState.selectedValues}
-		/>
-	</div>
+<div class="filters-container">
+	<div class="filters">
+		<div>
+			<h3>PHP CMSes</h3>
+			<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
+			<FilterCheckboxes
+				labelsAndValues={availableFilterValues.phpCmses}
+				bind:statePropToBind={stackTagsState.selectedValues}
+			/>
+		</div>
 
-	<div>
-		<h3>JavaScript</h3>
-		<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
-		<FilterCheckboxes
-			labelsAndValues={availableFilterValues.frontendFrameworks}
-			bind:statePropToBind={stackTagsState.selectedValues}
-		/>
-	</div>
+		<div>
+			<h3>JavaScript</h3>
+			<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
+			<FilterCheckboxes
+				labelsAndValues={availableFilterValues.frontendFrameworks}
+				bind:statePropToBind={stackTagsState.selectedValues}
+			/>
+		</div>
 
-	<div>
-		<h3>Cities</h3>
-		<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
-		<FilterCheckboxes
-			labelsAndValues={data.cityCounts}
-			bind:statePropToBind={citiesState.selectedValues}
-			style="max-height:175px; overflow:scroll"
-		/>
-	</div>
+		<div>
+			<h3>Cities</h3>
+			<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
+			<FilterCheckboxes
+				labelsAndValues={data.cityCounts}
+				bind:statePropToBind={citiesState.selectedValues}
+				style="max-height:175px; overflow:scroll"
+			/>
+		</div>
 
-	<div>
-		<h3>PHP Frameworks</h3>
-		<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
-		<FilterCheckboxes
-			labelsAndValues={availableFilterValues.phpFrameworks}
-			bind:statePropToBind={stackTagsState.selectedValues}
-		/>
-	</div>
+		<div>
+			<h3>PHP Frameworks</h3>
+			<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
+			<FilterCheckboxes
+				labelsAndValues={availableFilterValues.phpFrameworks}
+				bind:statePropToBind={stackTagsState.selectedValues}
+			/>
+		</div>
 
-	<div>
-		<h3>Specials</h3>
-		<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
-		<FilterCheckboxes
-			labelsAndValues={availableFilterValues.specialTags}
-			bind:statePropToBind={specialTagsState.selectedValues}
-		/>
-	</div>
+		<div>
+			<h3>Specials</h3>
+			<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
+			<FilterCheckboxes
+				labelsAndValues={availableFilterValues.specialTags}
+				bind:statePropToBind={specialTagsState.selectedValues}
+			/>
+		</div>
 
-	<div>
-		<h3>Search Text</h3>
-		<FilterTextInput
-			label="Search for text"
-			bind:statePropToBind={searchTextState.text}
-			placeholder="Search term ..."
-		/>
+		<div>
+			<h3>Search Text</h3>
+			<FilterTextInput
+				label="Search for text"
+				bind:statePropToBind={searchTextState.text}
+				placeholder="Search term ..."
+			/>
+		</div>
 	</div>
 </div>
 
 <ResultList companiesData={data} />
 
 <style lang="scss">
-	.checkbox-groups {
+	/* enable container queries */
+	.filters-container {
+		container-name: filtersContainer;
+		container-type: inline-size;
+		width: 100%;
+	}
+
+	.filters {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 		column-gap: 1rem;
@@ -86,6 +95,30 @@
 		h3 {
 			font-size: 1rem;
 			margin-top: 0.5rem;
+		}
+
+		/* Container query for smaller containers */
+		@container filtersContainer (max-width: 768px) {
+			column-gap: 0.5rem;
+			row-gap: 1rem;
+
+			h3 {
+				font-size: 0.9rem;
+			}
+		}
+
+		/* Container query for very small containers */
+		@container filtersContainer (max-width: 480px) {
+			grid-template-columns: 1fr; /* Stack filters vertically */
+			row-gap: 0.8rem;
+			h3 {
+				font-size: 0.85rem;
+
+				/* Manage height and scrolling behavior for the Cities filter */
+				div:nth-child(3) {
+					max-height: 150px;
+				}
+			}
 		}
 	}
 </style>

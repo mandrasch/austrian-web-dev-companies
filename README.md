@@ -12,7 +12,7 @@ I like searches like https://devjobs.at/teams/search, but I think they could be 
 
 ## Data sources
 
-I'll add new data based on latest active job offers or partner directories of CMSes / frameworks. Would be best to show companies with open job offers first, but portals like https://devjobs.at/ do a better job here (with crawlers).
+I'll add new data based on latest active job offers or partner directories of CMSes / frameworks. Would be best to show companies with open job offers first, but portals like https://devjobs.at/ (with crawlers) do a better job here .
 
 ### Add a company
 
@@ -20,9 +20,12 @@ Please just open a PR and add the data to `static/companies.json`.
 
 ## TODOs
 
-- [ ] pagination
+- [ ] pagination (https://www.youtube.com/watch?v=G-tafjJzfQo), but with v5
 - [ ] store selected tags in URL (state)
+- [ ] move filters into own component
 - [ ] optimize mobile
+- [ ] toggle filter view
+- [ ] bonus: add statistics page with overview of used technology
 - [x] remove custom class, object is enough for simplicity - https://svelte.dev/playground/17af110213b9434d95dff6ae2e62c100?version=5.16.0
 - [ ] Show technologies with logo
 - [ ] update checkboxes inside FilterCheckboxes.svelte when global State changes (!)
