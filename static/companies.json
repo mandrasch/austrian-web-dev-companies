@@ -70,5 +70,14 @@
 		"specialTags": [""],
 		"websiteUrl": "https://ahoikapptn.com/",
 		"devjobsAtIdentifier": "ahoi-kapptn"
+	},
+	{
+		"companyName": "Getdesigned",
+		"teaser": "Getdesigned: Webagentur Getdesigned – Digitalagentur für Webdesign",
+		"cities": ["Wien"],
+		"stackTags": ["TYPO3", "CraftCMS"],
+		"specialTags": [""],
+		"websiteUrl": "https://www.getdesigned.at",
+		"devjobsAtIdentifier": "getdesigned"
 	}
 ]
