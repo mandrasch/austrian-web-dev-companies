@@ -1,24 +1,30 @@
 # Austrian Web Dev Map
 
-Searching for a job can be tiresome, this map might help a bit. Good luck!
+Looking for a job can be tiresome, this directory might help. Good luck!
 
-Demo: https://austrian-web-dev-companies.pages.dev/
+Demo: https://austrian-web-dev-companies.pages.dev
 
 Hobby project with Svelte v5. 🪄 Read my technical notes [here](https://dev.to/mandrasch/svelte-5-share-state-between-components-for-dummies-4gd2).
 
 ## Why?
 
-I like searches like https://devjobs.at/teams/search, but I think they could be improved with a more stack-focused UI.
+I like sites such as https://devjobs.at/teams/search, but I think they could be improved with a more stack-focused user interface.
 
 ## Data sources
 
-I'll add new data based on latest active job offers or partner directories of CMSes / frameworks. Would be best to show companies with open job offers first, but portals like https://devjobs.at/ (with crawlers) do a better job here .
+I'll add new data based on latest job offers or partner directories of CMSes / frameworks. Would be best to show companies with open job offers first, but portals like https://devjobs.at/ (with crawlers) do a better job here.
 
 ### Add (or remove) a company
 
-Please just add the data to [`static/companies.json`](https://github.com/mandrasch/austrian-web-dev-companies/blob/main/static/companies.json) and open a PR. Or drop me a mail if you're not on GitHub.
+Please just add the data to [`static/companies.json`](https://github.com/mandrasch/austrian-web-dev-companies/blob/main/static/companies.json) and open a PR. Or drop me a quick mail.
 
-If you want to remove your company from this directory, please just send me a quick note: matthias-andrasch-kontakt@mailbox.org.
+If you want to remove your company, please just send me a quick note: matthias-andrasch-kontakt@mailbox.org
+
+## Thanks to ...
+
+- https://simplecss.org/
+- https://github.com/sphade/svelte5-productfilter
+- the Svelte Community for answering questions
 
 ## TODOs
 
@@ -44,8 +50,3 @@ If you want to remove your company from this directory, please just send me a qu
 - [ ] add NodeJS CMS like strapi, directus (?)
 - [ ] a11y check
 - [x] GitHub corner
-
-## Thanks to ...
-
-- https://github.com/sphade/svelte5-productfilter
-- https://simplecss.org/

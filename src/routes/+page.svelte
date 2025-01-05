@@ -1,10 +1,19 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+
 	import FilterCheckboxes from '$lib/components/FilterCheckboxes.svelte';
 	import FilterTextInput from '$lib/components/FilterTextInput.svelte';
 	import ResultList from '$lib/components/ResultList.svelte';
 
+	// Import available values for stack filters, etc. (hardcoded)
 	import { availableFilterValues } from '$lib/shared';
 
+	// Receive the current companies data from the `load` function via +page.ts
+	import type { PageData } from './$types';
+	let { data }: { data: PageData } = $props();
+
+	// Import shared state
 	import {
 		stackTagsState,
 		specialTagsState,
@@ -12,9 +21,50 @@
 		searchTextState
 	} from '$lib/state.svelte';
 
-	// Receive the companies data from the `load` function via +page.ts
-	import type { PageData } from './$types';
-	let { data }: { data: PageData } = $props();
+	// TODO: is onMount the right thing for this?
+	onMount(() => {
+		console.log('the component has mounted');
+
+		// On page load, we need to set filter state from URL params
+
+		stackTagsState.selectedPhpCmses = data.url.searchParams.get('phpCmses')?.split(',') || [];
+		stackTagsState.selectedPhpFrameworks =
+			data.url.searchParams.get('phpFrameworks')?.split(',') || [];
+		stackTagsState.selectedJavaScriptFrameworks =
+			data.url.searchParams.get('jsFrameworks')?.split(',') || [];
+		specialTagsState.selectedValues = data.url.searchParams.get('specialTags')?.split(',') || [];
+		citiesState.selectedValues = data.url.searchParams.get('cities')?.split(',') || [];
+		searchTextState.text = data.url.searchParams.get('s') || '';
+	});
+
+	// Listen for state changes, update URL params
+	// TODO: where is the best place for this logic?
+	// TODO: should I use effect() or $derived?
+	// TODO: this is currently triggered to soon when we use onMount, see how others do it in tutorials!
+	$effect(() => {
+		console.log('$effect() triggered ...');
+
+		// Very verbose here, can be refactored - but keeping it simple here for now
+
+		// Serialize filters and pagination into query parameters
+		const selectedPhpCmses = stackTagsState.selectedPhpCmses.join(',');
+		const selectedPhpFrameworks = stackTagsState.selectedPhpFrameworks.join(',');
+		const selectedJavaScriptFrameworks = stackTagsState.selectedJavaScriptFrameworks.join(',');
+		const selectedSpecialTags = specialTagsState.selectedValues.join(',');
+		const selectedCities = citiesState.selectedValues.join(',');
+		const searchText = searchTextState.text;
+
+		const params = new URLSearchParams();
+		if (selectedPhpCmses) params.set('phpCmses', selectedPhpCmses);
+		if (selectedPhpFrameworks) params.set('phpFrameworks', selectedPhpFrameworks);
+		if (selectedJavaScriptFrameworks) params.set('jsFrameworks', selectedJavaScriptFrameworks);
+		if (selectedSpecialTags) params.set('specialTags', selectedSpecialTags);
+		if (selectedCities) params.set('cities', selectedCities);
+		if (searchText) params.set('s', searchText);
+
+		// Trigger a page load with new query parameters
+		goto(`?${params.toString()}`, { replaceState: true });
+	});
 </script>
 
 <div class="filters-container">
@@ -24,7 +74,7 @@
 			<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
 			<FilterCheckboxes
 				labelsAndValues={availableFilterValues.phpCmses}
-				bind:statePropToBind={stackTagsState.selectedValues}
+				bind:statePropToBind={stackTagsState.selectedPhpCmses}
 			/>
 		</div>
 
@@ -32,8 +82,8 @@
 			<h3>JavaScript</h3>
 			<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
 			<FilterCheckboxes
-				labelsAndValues={availableFilterValues.frontendFrameworks}
-				bind:statePropToBind={stackTagsState.selectedValues}
+				labelsAndValues={availableFilterValues.javascriptFrameworks}
+				bind:statePropToBind={stackTagsState.selectedJavaScriptFrameworks}
 			/>
 		</div>
 
@@ -52,7 +102,7 @@
 			<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
 			<FilterCheckboxes
 				labelsAndValues={availableFilterValues.phpFrameworks}
-				bind:statePropToBind={stackTagsState.selectedValues}
+				bind:statePropToBind={stackTagsState.selectedPhpFrameworks}
 			/>
 		</div>
 
@@ -76,7 +126,12 @@
 	</div>
 </div>
 
-<ResultList companiesData={data} />
+<ResultList
+	companiesData={data.companies}
+	total={data.total}
+	limit={data.limit}
+	currentPage={data.currentPage}
+/>
 
 <style lang="scss">
 	/* enable container queries */

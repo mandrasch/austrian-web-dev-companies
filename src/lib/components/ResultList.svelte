@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { fade } from 'svelte/transition';
 	import type { Company } from '$lib/types';
 
 	// TODO: add type hinting
-	let { companiesData } = $props();
+	let { companiesData, total, limit, currentPage } = $props();
 
 	// import shared state
 	import {
@@ -16,17 +17,33 @@
 
 	// Listen for state changes
 	// Apply the filters based on selected tags from all groups
-	let filteredCompaniesResult = $derived.by(() => {
+	/*let filteredCompaniesResult = $derived.by(() => {
 		let filteredCompanies: Company[] = [];
 
 		console.log('applySearchFilters() triggered ...');
-		if (stackTagsState.selectedValues.length === 0) {
-			// If no tags are selected, show all companies
-			filteredCompanies = companiesData.companies;
-		} else {
+
+		filteredCompanies = companiesData.companies;
+
+		// Very verbose here, could be refactored - but keeping it simple here
+
+		if (stackTagsState.selectedJavaScriptFrameworks.length > 0) {
 			// Filter companies based on the combined stack tags
 			filteredCompanies = companiesData.companies.filter((company: Company) =>
-				stackTagsState.selectedValues.every((tag) => company.stackTags.includes(tag))
+				stackTagsState.selectedJavaScriptFrameworks.every((tag) => company.stackTags.includes(tag))
+			);
+		}
+
+		if (stackTagsState.selectedPhpCmses.length > 0) {
+			// Filter companies based on the combined stack tags
+			filteredCompanies = companiesData.companies.filter((company: Company) =>
+				stackTagsState.selectedPhpCmses.every((tag) => company.stackTags.includes(tag))
+			);
+		}
+
+		if (stackTagsState.selectedPhpFrameworks.length > 0) {
+			// Filter companies based on the combined stack tags
+			filteredCompanies = companiesData.companies.filter((company: Company) =>
+				stackTagsState.selectedPhpFrameworks.every((tag) => company.stackTags.includes(tag))
 			);
 		}
 
@@ -53,19 +70,26 @@
 		}
 		return filteredCompanies;
 	});
+	*/
+
+	function updateUrl() {
+		// Get the current search parameters from the URL, set new current page for pagination
+		const searchParams = new URLSearchParams(window.location.search);
+		searchParams.set('p', currentPage.toString());
+		goto(`?${searchParams.toString()}`, { replaceState: true });
+	}
 
 	function resetFilters() {
-		// reset state
 		resetSelectedTags();
 	}
 </script>
 
 <div>
 	<div class="resultCount">
-		<p style="font-weight: bold;">{filteredCompaniesResult.length} companies found:</p>
+		<p style="font-weight: bold;">{total} companies found:</p>
 
 		<!-- TODO find easier way to check if filters are set, derived? -->
-		{#if stackTagsState.selectedValues.length > 0 || specialTagsState.selectedValues.length > 0 || citiesState.selectedValues.length > 0 || searchTextState.text != ''}
+		{#if stackTagsState.selectedJavaScriptFrameworks.length > 0 || stackTagsState.selectedPhpCmses.length > 0 || stackTagsState.selectedPhpFrameworks.length > 0 || specialTagsState.selectedValues.length > 0 || citiesState.selectedValues.length > 0 || searchTextState.text != ''}
 			<div>
 				<button in:fade={{ delay: 100 }} out:fade onclick={() => resetFilters()}
 					>Reset filters</button
@@ -74,7 +98,7 @@
 		{/if}
 	</div>
 
-	{#each filteredCompaniesResult as company (company.companyName)}
+	{#each companiesData as company (company.companyName)}
 		<article>
 			<h3>{company.companyName}</h3>
 			<p>{company.teaser}</p>
@@ -150,6 +174,25 @@
 			</p>
 		</article>
 	{/each}
+
+	<div class="pagination">
+		{#if currentPage > 1}
+			<button
+				onclick={() => {
+					currentPage--;
+					updateUrl();
+				}}>Previous</button
+			>
+		{/if}
+		{#if currentPage * limit < total}
+			<button
+				onclick={() => {
+					currentPage++;
+					updateUrl();
+				}}>Next</button
+			>
+		{/if}
+	</div>
 </div>
 
 <style lang="scss">

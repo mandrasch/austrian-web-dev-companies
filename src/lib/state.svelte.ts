@@ -2,15 +2,23 @@
 
 // Tag based states
 // If you want to use it as import, you need to wrap the array into an Object
-export const stackTagsState = $state({ selectedValues: [] });
-export const specialTagsState = $state({ selectedValues: [] });
-export const citiesState = $state({ selectedValues: [] });
+export const stackTagsState = $state({
+	// we need to split it in order to use bind:group (https://github.com/sveltejs/svelte/issues/2308)
+	selectedPhpCmses: [] as string[],
+	selectedPhpFrameworks: [] as string[],
+	selectedJavaScriptFrameworks: [] as string[]
+});
+
+export const specialTagsState = $state({ selectedValues: [] as string[] });
+export const citiesState = $state({ selectedValues: [] as string[] });
 
 // Text state
 export const searchTextState = $state({ text: '' });
 
 export function resetSelectedTags() {
-	stackTagsState.selectedValues = [];
+	stackTagsState.selectedPhpCmses = [];
+	stackTagsState.selectedPhpFrameworks = [];
+	stackTagsState.selectedJavaScriptFrameworks = [];
 	specialTagsState.selectedValues = [];
 	citiesState.selectedValues = [];
 	searchTextState.text = '';

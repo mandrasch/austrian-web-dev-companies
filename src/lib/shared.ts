@@ -11,7 +11,7 @@ export const availableFilterValues = {
 		{ label: 'Laravel', value: 'Laravel' },
 		{ label: 'Symfony', value: 'Symfony' }
 	],
-	frontendFrameworks: [
+	javascriptFrameworks: [
 		{ label: 'Angular', value: 'Angular' },
 		{ label: 'React', value: 'React' },
 		{ label: 'Svelte', value: 'Svelte' },
