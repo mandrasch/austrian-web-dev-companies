@@ -1,4 +1,4 @@
-# Austrian Web Dev Map
+# Austrian Web Dev Companies
 
 Looking for a job can be tiresome, this directory might help. Good luck!
 
