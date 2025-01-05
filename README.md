@@ -14,9 +14,11 @@ I like searches like https://devjobs.at/teams/search, but I think they could be 
 
 I'll add new data based on latest active job offers or partner directories of CMSes / frameworks. Would be best to show companies with open job offers first, but portals like https://devjobs.at/ (with crawlers) do a better job here .
 
-### Add a company
+### Add (or remove) a company
 
-Please just open a PR and add the data to `static/companies.json`.
+Please just add the data to [`static/companies.json`](https://github.com/mandrasch/austrian-web-dev-companies/blob/main/static/companies.json) and open a PR. Or drop me a mail if you're not on GitHub.
+
+If you want to remove your company from this directory, please just send me a quick note: matthias-andrasch-kontakt@mailbox.org.
 
 ## TODOs
 
