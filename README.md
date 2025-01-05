@@ -4,7 +4,7 @@ Searching for a job can be tiresome, this map might help a bit. Good luck!
 
 Demo: https://austrian-web-dev-companies.pages.dev/
 
-Hobby project with Svelte v5. 🪄
+Hobby project with Svelte v5. 🪄 Read my technical notes [here](https://dev.to/mandrasch/svelte-5-share-state-between-components-for-dummies-4gd2).
 
 ## Why?
 
