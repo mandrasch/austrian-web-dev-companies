@@ -79,5 +79,14 @@
 		"specialTags": [""],
 		"websiteUrl": "https://www.getdesigned.at",
 		"devjobsAtIdentifier": "getdesigned"
+	},
+	{
+		"companyName": "STANDARD Medien AG",
+		"teaser": "Die STANDARD Medien AG zählt zu einem der modernsten und größten Medienunternehmen Österreichs.",
+		"cities": ["Wien"],
+		"stackTags": ["Svelte", "React"],
+		"specialTags": [""],
+		"websiteUrl": "https://about.derstandard.at/",
+		"devjobsAtIdentifier": "standard-medien-ag"
 	}
 ]
