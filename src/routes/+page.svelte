@@ -73,6 +73,9 @@
 			citiesState.selectedValues = searchParams.get('cities')?.split(',') || [];
 			searchTextState.text = searchParams.get('s') || '';
 
+			// because updating selectedTags will cause effect to fire again, we'll exit in the next call
+			effectParams.exit = true;
+
 			// don't track paginationState in this $effect
 			untrack(() => (paginationState.currentPage = parseInt(searchParams.get('p') || '1')));
 
@@ -83,8 +86,8 @@
 		// avoid circular logic, since state is being updated above in the effect,
 		// which would cause the effect to run again on this change.
 		if (effectParams.exit) {
-			console.log('$effect exit after onMount');
-			effectParams.exit = false;
+			console.log('$effect exit');
+			effectParams.exit = false; // reset exit state
 			return;
 		}
 
