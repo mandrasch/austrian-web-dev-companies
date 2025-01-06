@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	let {
 		labelsAndValues,
 		// statePropToBind = the state which should be updated when checkboxes are selected,
