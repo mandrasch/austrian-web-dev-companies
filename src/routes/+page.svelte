@@ -83,7 +83,7 @@
 		// TODO: we need to reset pagination state after new filters are set, but not on pagination actions - this is because $effect is also triggered on page load ... Currently it's get lost if we navigate freshly to /?p=2
 		// TODO: how do we find out here that filters were changed?
 		// if (paginationState.currentPage) params.set('p', paginationState.currentPage.toString());
-		// Important reset pagination state when filters change
+		// Important reset pagination state when filters change, therefore we leave it out
 
 		// Push new query parameters to URL
 		goto(`?${params.toString()}`, { replaceState: true });

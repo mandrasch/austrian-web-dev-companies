@@ -28,8 +28,8 @@ If you want to remove your company, please just send me a quick note: matthias-a
 
 ## TODOs
 
-- [ ] fix: pagination reset when new filters are selected (WIP)
-- [ ] fix: reset search text input for "reset filters" button
+- [ ] fix: pagination and ?p reset when new filters are selected (WIP)
+- [ ] fix: reset search text input for "reset filters" button action
 - [ ] store selected tags in URL (WIP)
 - [ ] move filters into own component
 - [x] optimize mobile
