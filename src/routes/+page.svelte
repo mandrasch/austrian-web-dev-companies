@@ -115,7 +115,7 @@
 </script>
 
 <div class="filters-container">
-	{JSON.stringify(paginationState)}
+	<!-- {JSON.stringify(paginationState)} -->
 	<div class="filters">
 		<div>
 			<h3>PHP CMSes</h3>
