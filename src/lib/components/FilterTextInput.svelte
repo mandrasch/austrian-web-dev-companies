@@ -1,15 +1,31 @@
 <script lang="ts">
-	let {
-		label,
-		// statePropToBind = the state which should be updated when checkboxes are selected,
-		// important: use $bindable, otherwise this won't work
-		statePropToBind = $bindable(),
-		...props
-	} = $props();
+	// TODO: is there a better pattern for this?
+
+	let { label, stateProp = $bindable(), ...props } = $props();
+
+	let inputEl: HTMLInputElement;
+
+	// initial value on page load, passed down as prop
+	let initialValue = stateProp;
+
+	// TODO: if reset filters is clicked, this needs to be resetted as well
+
+	// we use onchange here, otherwise $effect/go:to fire after each inputted character (with bind:value)
+	function handleChange() {
+		// update shared state
+		stateProp = inputEl.value;
+	}
 </script>
 
 <label>
-	<input aria-label={label} type="text" bind:value={statePropToBind} {...props} />
+	<input
+		aria-label={label}
+		type="text"
+		value={initialValue}
+		onchange={handleChange}
+		bind:this={inputEl}
+		{...props}
+	/>
 </label>
 
 <style>

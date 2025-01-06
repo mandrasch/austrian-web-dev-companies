@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
+	import { goto, afterNavigate, beforeNavigate } from '$app/navigation';
 
 	import FilterCheckboxes from '$lib/components/FilterCheckboxes.svelte';
 	import FilterTextInput from '$lib/components/FilterTextInput.svelte';
@@ -28,18 +28,6 @@
 
 		// On page load, we need to set filter state from URL params
 		const searchParams = new URLSearchParams(window.location.search);
-
-		// Get URL params
-		/*const limit = parseInt(searchParams.get('l') || '5', 10);
-		const currentPage = parseInt(searchParams.get('p') || '1', 10);
-		const selectedPhpCmses = searchParams.get('phpCmses')?.split(',') || [];
-		const selectedPhpFrameworks = searchParams.get('phpFrameworks')?.split(',') || [];
-		const selectedJavaScriptFrameworks = searchParams.get('jsFrameworks')?.split(',') || [];
-		const selectedSpecialTags = searchParams.get('specialTags')?.split(',') || [];
-		const selectedCities = searchParams.get('cities')?.split(',') || [];
-		const searchText = searchParams.get('s')?.toLowerCase() || '';*/
-
-		// Set state
 		stackTagsState.selectedPhpCmses = searchParams.get('phpCmses')?.split(',') || [];
 		stackTagsState.selectedPhpFrameworks = searchParams.get('phpFrameworks')?.split(',') || [];
 		stackTagsState.selectedJavaScriptFrameworks =
@@ -47,18 +35,33 @@
 		specialTagsState.selectedValues = searchParams.get('specialTags')?.split(',') || [];
 		citiesState.selectedValues = searchParams.get('cities')?.split(',') || [];
 		searchTextState.text = searchParams.get('s') || '';
-
 		paginationState.currentPage = parseInt(searchParams.get('p') || '1', 10);
 		// TODO: add limit ?l
 	});
 
+	// Scroll to results after pagination clicks / navigation
+	let resultListContainerEl: HTMLDivElement;
+	let previousCurrentPage = $state(0);
+	beforeNavigate(() => {
+		// store previous current page before navigating
+		previousCurrentPage = paginationState.currentPage - 1;
+	});
+	afterNavigate(() => {
+		const searchParams = new URLSearchParams(window.location.search);
+		const p = searchParams.get('p');
+		if (p !== null) {
+			// only scroll if pagination param changed in URL
+			if (parseInt(p) !== previousCurrentPage) {
+				resultListContainerEl.scrollIntoView();
+			}
+		}
+	});
+
+	// TODO: this is currently triggered to soon when we use onMount, see how others do it in tutorials!
 	// Listen for state changes, update URL params
 	// TODO: where is the best place for this logic?
 	// TODO: should I use effect() or $derived?
-	// TODO: this is currently triggered to soon when we use onMount, see how others do it in tutorials!
 	$effect(() => {
-		console.log('$effect() triggered ...');
-
 		// Very verbose here, can be refactored - but keeping it simple here for now
 
 		// Serialize filters and pagination into query parameters
@@ -77,10 +80,12 @@
 		if (selectedCities) params.set('cities', selectedCities);
 		if (searchText) params.set('s', searchText);
 
-		// Important reset pagination state
-		paginationState.currentPage = 1;
+		// TODO: we need to reset pagination state after new filters are set, but not on pagination actions - this is because $effect is also triggered on page load ... Currently it's get lost if we navigate freshly to /?p=2
+		// TODO: how do we find out here that filters were changed?
+		// if (paginationState.currentPage) params.set('p', paginationState.currentPage.toString());
+		// Important reset pagination state when filters change
 
-		// Trigger a page load with new query parameters
+		// Push new query parameters to URL
 		goto(`?${params.toString()}`, { replaceState: true });
 	});
 </script>
@@ -111,7 +116,7 @@
 			<FilterCheckboxes
 				labelsAndValues={data.cityCounts}
 				bind:statePropToBind={citiesState.selectedValues}
-				style="max-height:175px; overflow:scroll"
+				style="max-height:150px; overflow:auto"
 			/>
 		</div>
 
@@ -135,16 +140,19 @@
 
 		<div>
 			<h3>Search Text</h3>
+			<!-- Important: Use bind:statePropToBind=.. to pass the bindable as prop, otherwise this won't work -->
 			<FilterTextInput
 				label="Search for text"
-				bind:statePropToBind={searchTextState.text}
+				bind:stateProp={searchTextState.text}
 				placeholder="Search term ..."
 			/>
 		</div>
 	</div>
 </div>
 
-<ResultList companiesData={data.companies} />
+<div bind:this={resultListContainerEl}>
+	<ResultList companiesData={data.companies} />
+</div>
 
 <style lang="scss">
 	/* enable container queries */
@@ -177,7 +185,7 @@
 
 		/* Container query for very small containers */
 		@container filtersContainer (max-width: 480px) {
-			grid-template-columns: 1fr; /* Stack filters vertically */
+			grid-template-columns: 1fr 1fr; /* Stack filters vertically */
 			row-gap: 0.8rem;
 			h3 {
 				font-size: 0.85rem;

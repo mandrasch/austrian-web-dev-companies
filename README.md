@@ -28,26 +28,22 @@ If you want to remove your company, please just send me a quick note: matthias-a
 
 ## TODOs
 
-- [ ] debounce for search text input / use onchange
-- [ ] pagination (https://www.youtube.com/watch?v=G-tafjJzfQo), but with v5
-- [ ] store selected tags in URL (state)
+- [ ] fix: pagination reset when new filters are selected (WIP)
+- [ ] fix: reset search text input for "reset filters" button
+- [ ] store selected tags in URL (WIP)
 - [ ] move filters into own component
 - [x] optimize mobile
-- [ ] toggle filter view
+- [ ] ui: option to toggle filter view
 - [ ] bonus: add statistics page with overview of used technology
 - [x] remove custom class, object is enough for simplicity - https://svelte.dev/playground/17af110213b9434d95dff6ae2e62c100?version=5.16.0
 - [ ] Show technologies with logo
-- [ ] update checkboxes inside FilterCheckboxes.svelte when global State changes (!)
+- [x] update checkboxes inside FilterCheckboxes.svelte when global State changes (!)
 - [x] create <ResultList /> component, https://svelte.dev/playground/17af110213b9434d95dff6ae2e62c100?version=5.16.0
-- [ ] bonus: if a filter is set, we should check what else is there in dataset? e.g. which cities? gray out other stuff?
 - [ ] robust data validation for JSON, throw build error for unexpected values (currently everything is casesensitive)
-- [ ] mobile optimization
 - [ ] add social share image
 - [x] add seo title and description
 - [x] add header
-- [ ] add footer, info about how to add a company (PR or email)
-- [ ] add imprint & privacy
-- [ ] isolate functions in components
+- [x] add footer, info about how to add a company (PR or email)
 - [ ] add NodeJS CMS like strapi, directus (?)
 - [ ] a11y check
 - [x] GitHub corner
