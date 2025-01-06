@@ -5,7 +5,6 @@
 
 	// all JSON companies
 	let { companiesData } = $props();
-	let total = 0;
 
 	// import shared state
 	import {
@@ -20,7 +19,7 @@
 	// Listen for state changes
 	// Apply the filters based on selected tags from all groups
 	let results = $derived.by(() => {
-		console.log('applySearchFilters() triggered ...');
+		console.log('$derived.by triggered, filter results again ...');
 
 		// start fresh
 		let filteredCompanies: Company[] = [];
@@ -84,12 +83,6 @@
 		return { companies: paginatedCompanies, total: filteredCompanies.length };
 	});
 
-	// TODO:
-
-	/* TOOD: use pagination state
-	
-	*/
-
 	function updateUrl() {
 		// Get the current search parameters from the URL, set new current page for pagination
 		const searchParams = new URLSearchParams(window.location.search);
@@ -104,7 +97,9 @@
 
 <div>
 	<div class="resultCount">
-		<p style="font-weight: bold;">{results.total} companies found:</p>
+		<p style="font-weight: bold;">
+			{results.total} companies found / Page: {paginationState.currentPage}
+		</p>
 
 		<!-- TODO find easier way to check if filters are set, derived? -->
 		{#if stackTagsState.selectedJavaScriptFrameworks.length > 0 || stackTagsState.selectedPhpCmses.length > 0 || stackTagsState.selectedPhpFrameworks.length > 0 || specialTagsState.selectedValues.length > 0 || citiesState.selectedValues.length > 0 || searchTextState.text != ''}

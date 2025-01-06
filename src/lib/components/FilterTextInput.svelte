@@ -1,19 +1,20 @@
 <script lang="ts">
 	// TODO: is there a better pattern for this?
+	import { goto } from '$app/navigation';
 
-	let { label, stateProp = $bindable(), ...props } = $props();
+	let { label, statePropToBind = $bindable(), ...props } = $props();
 
-	let inputEl: HTMLInputElement;
-
-	// initial value on page load, passed down as prop
-	let initialValue = stateProp;
-
-	// TODO: if reset filters is clicked, this needs to be resetted as well
-
-	// we use onchange here, otherwise $effect/go:to fire after each inputted character (with bind:value)
+	// we use onchange here, otherwise $effect/go:to fire and change the URL after each inputted character (with bind:value and global $effect())
+	// but currently bind:value directly triggers a new search in <ResultList> - how can we delay it till user typed?
 	function handleChange() {
-		// update shared state
-		stateProp = inputEl.value;
+		// update URL state
+		const searchParams = new URLSearchParams(window.location.search);
+		if (statePropToBind === '') {
+			searchParams.delete('s');
+		} else {
+			searchParams.set('s', statePropToBind);
+		}
+		goto(`?${searchParams.toString()}`, { replaceState: false });
 	}
 </script>
 
@@ -21,9 +22,8 @@
 	<input
 		aria-label={label}
 		type="text"
-		value={initialValue}
+		bind:value={statePropToBind}
 		onchange={handleChange}
-		bind:this={inputEl}
 		{...props}
 	/>
 </label>

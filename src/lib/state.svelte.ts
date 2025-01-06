@@ -1,3 +1,5 @@
+// import { goto } from '$app/navigation';
+
 // See https://dev.to/mandrasch/svelte-5-share-state-between-components-for-dummies-4gd2
 
 // Tag based states
@@ -16,15 +18,23 @@ export const citiesState = $state({ selectedValues: [] as string[] });
 export const searchTextState = $state({ text: '' });
 
 // Pagination state
-export const paginationState = $state({ currentPage: 1, limit: 100 });
+export const paginationState = $state({ currentPage: 1, limit: 5 });
 
 export function resetSelectedTags() {
+	// TODO: this does not really work ...
+
+	// reset all states
 	stackTagsState.selectedPhpCmses = [];
 	stackTagsState.selectedPhpFrameworks = [];
 	stackTagsState.selectedJavaScriptFrameworks = [];
 	specialTagsState.selectedValues = [];
 	citiesState.selectedValues = [];
 	searchTextState.text = '';
+
+	// reset url params, because there is a race condition in components --> or should we handle this differently?
+	/*const searchParams = new URLSearchParams();
+	alert('goto');
+	goto(`?${searchParams.toString()}`, { replaceState: true });*/
 }
 
 // You could also use a custom class to centralize logic parts, not done here for simplicity
