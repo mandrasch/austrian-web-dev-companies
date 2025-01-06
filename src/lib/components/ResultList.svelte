@@ -19,7 +19,7 @@
 	// Listen for state changes
 	// Apply the filters based on selected tags from all groups
 	let results = $derived.by(() => {
-		console.log('$derived.by triggered, filter results again ...');
+		console.log('$derived.by triggered, filter results...');
 
 		// start fresh
 		let filteredCompanies: Company[] = [];
@@ -70,8 +70,8 @@
 			);
 		}
 
-		console.log({ filteredCompanies });
-		console.log({ paginationState });
+		/*console.log({ filteredCompanies });
+		console.log({ paginationState });*/
 
 		// Filtering is done, let's paginate!
 		const startIndex = (paginationState.currentPage - 1) * paginationState.limit;
