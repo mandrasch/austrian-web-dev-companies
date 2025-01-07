@@ -1,20 +1,11 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import { fade } from 'svelte/transition';
 	import type { Company } from '$lib/types';
 
 	// all JSON companies
 	let { companiesData } = $props();
-
-	// import shared state
-	import {
-		stackTagsState,
-		specialTagsState,
-		citiesState,
-		searchTextState,
-		paginationState,
-		resetSelectedTags
-	} from '$lib/state.svelte';
 
 	// Listen for state changes
 	// Apply the filters based on selected tags from all groups
@@ -25,44 +16,72 @@
 		let filteredCompanies: Company[] = [];
 		filteredCompanies = companiesData;
 
+		// very verbose here (again), but we keep it simple and readable here
+
+		// Our source of thruth for state is page.url.searchParams
+		// TODO: move key names to const helper
+		const selectedJsFrameworks = page.url.searchParams.get('jsFrameworks')?.split(',') || [];
+		const selectedPhpCmses = page.url.searchParams.get('phpCmses')?.split(',') || [];
+		const selectedPhpFrameworks = page.url.searchParams.get('phpFrameworks')?.split(',') || [];
+		const selectedCities = page.url.searchParams.get('cities')?.split(',') || [];
+		const selectedSpecialTags = page.url.searchParams.get('specialTags')?.split(',') || [];
+		const selectedSearchText = page.url.searchParams.get('s') || '';
+
+		// helper var for reset filters button
+		const isFilterSet = [
+			selectedJsFrameworks.length > 0,
+			selectedPhpCmses.length > 0,
+			selectedPhpFrameworks.length > 0,
+			selectedCities.length > 0,
+			selectedSpecialTags.length > 0,
+			selectedSearchText !== ''
+		].some(Boolean);
+
+		const paginationState = {
+			currentPage: parseInt(page.url.searchParams.get('p') || '1'),
+			limit: 5
+		};
+
 		// Very verbose here, could be refactored - but keeping it simple here
 
-		if (stackTagsState.selectedJavaScriptFrameworks.length > 0) {
+		// stack tags
+		if (selectedJsFrameworks.length > 0) {
 			// Filter companies based on the combined stack tags
 			filteredCompanies = filteredCompanies.filter((company: Company) =>
-				stackTagsState.selectedJavaScriptFrameworks.every((tag) => company.stackTags.includes(tag))
+				selectedJsFrameworks.every((tag) => company.stackTags.includes(tag))
+			);
+		}
+		if (selectedPhpCmses.length > 0) {
+			// Filter companies based on the combined stack tags
+			filteredCompanies = filteredCompanies.filter((company: Company) =>
+				selectedPhpCmses.every((tag) => company.stackTags.includes(tag))
+			);
+		}
+		if (selectedPhpFrameworks.length > 0) {
+			// Filter companies based on the combined stack tags
+			filteredCompanies = filteredCompanies.filter((company: Company) =>
+				selectedPhpFrameworks.every((tag) => company.stackTags.includes(tag))
 			);
 		}
 
-		if (stackTagsState.selectedPhpCmses.length > 0) {
-			// Filter companies based on the combined stack tags
-			filteredCompanies = filteredCompanies.filter((company: Company) =>
-				stackTagsState.selectedPhpCmses.every((tag) => company.stackTags.includes(tag))
-			);
-		}
-
-		if (stackTagsState.selectedPhpFrameworks.length > 0) {
-			// Filter companies based on the combined stack tags
-			filteredCompanies = filteredCompanies.filter((company: Company) =>
-				stackTagsState.selectedPhpFrameworks.every((tag) => company.stackTags.includes(tag))
-			);
-		}
-
-		if (specialTagsState.selectedValues.length > 0) {
+		// special tags
+		if (selectedSpecialTags.length > 0) {
 			// Filter companies based on the special tags
 			filteredCompanies = filteredCompanies.filter((company: Company) =>
-				specialTagsState.selectedValues.every((tag) => company.specialTags.includes(tag))
+				selectedSpecialTags.every((tag) => company.specialTags.includes(tag))
 			);
 		}
 
-		if (citiesState.selectedValues.length > 0) {
+		// cities
+		if (selectedCities.length > 0) {
 			filteredCompanies = filteredCompanies.filter((company: Company) =>
-				citiesState.selectedValues.every((city) => company.cities.includes(city))
+				selectedCities.every((city) => company.cities.includes(city))
 			);
 		}
 
-		if (searchTextState.text !== '') {
-			const searchTextLower = searchTextState.text.toLowerCase();
+		// search text
+		if (selectedSearchText !== '') {
+			const searchTextLower = selectedSearchText.toLowerCase();
 			filteredCompanies = filteredCompanies.filter(
 				(company: Company) =>
 					company.companyName.toLowerCase().includes(searchTextLower) ||
@@ -80,29 +99,34 @@
 			startIndex + paginationState.limit
 		);
 
-		return { companies: paginatedCompanies, total: filteredCompanies.length };
+		return {
+			companies: paginatedCompanies,
+			total: filteredCompanies.length,
+			paginationState,
+			isFilterSet
+		};
 	});
 
-	function updateUrl() {
-		// Get the current search parameters from the URL, set new current page for pagination
-		const searchParams = new URLSearchParams(window.location.search);
-		searchParams.set('p', paginationState.currentPage.toString());
-		goto(`?${searchParams.toString()}`, { replaceState: true });
+	function updateUrlForPaginationClick() {
+		// Get the current search parameters from the URL,
+		// set new current page for pagination
+		const searchParams = page.url.searchParams;
+		searchParams.set('p', results.paginationState.currentPage.toString());
+		goto(`?${searchParams.toString()}`);
 	}
 
 	function resetFilters() {
-		resetSelectedTags();
+		goto(`/`);
 	}
 </script>
 
 <div>
 	<div class="resultCount">
 		<p style="font-weight: bold;">
-			{results.total} companies found / Page: {paginationState.currentPage}
+			{results.total} companies found / Page: {results.paginationState.currentPage}
 		</p>
 
-		<!-- TODO find easier way to check if filters are set, derived? -->
-		{#if stackTagsState.selectedJavaScriptFrameworks.length > 0 || stackTagsState.selectedPhpCmses.length > 0 || stackTagsState.selectedPhpFrameworks.length > 0 || specialTagsState.selectedValues.length > 0 || citiesState.selectedValues.length > 0 || searchTextState.text != ''}
+		{#if results.isFilterSet}
 			<div>
 				<button in:fade={{ delay: 100 }} out:fade onclick={() => resetFilters()}
 					>Reset filters</button
@@ -189,19 +213,19 @@
 	{/each}
 
 	<div class="pagination">
-		{#if paginationState.currentPage > 1}
+		{#if results.paginationState.currentPage > 1}
 			<button
 				onclick={() => {
-					paginationState.currentPage--;
-					updateUrl();
+					results.paginationState.currentPage--;
+					updateUrlForPaginationClick();
 				}}>Previous</button
 			>
 		{/if}
-		{#if paginationState.currentPage * paginationState.limit < results.total}
+		{#if results.paginationState.currentPage * results.paginationState.limit < results.total}
 			<button
 				onclick={() => {
-					paginationState.currentPage++;
-					updateUrl();
+					results.paginationState.currentPage++;
+					updateUrlForPaginationClick();
 				}}>Next</button
 			>
 		{/if}

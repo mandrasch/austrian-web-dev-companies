@@ -1,31 +1,42 @@
 <script lang="ts">
 	// TODO: is there a better pattern for this?
+	// TODO: this component needs a re-work --> currently ?s= not accepted
+
+	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 
-	let { label, statePropToBind = $bindable(), ...props } = $props();
+	let { label = '' as string, searchParamsKey = '' as string, ...props } = $props();
 
-	// we use onchange here, otherwise $effect/go:to fire and change the URL after each inputted character (with bind:value and global $effect())
-	// but currently bind:value directly triggers a new search in <ResultList> - how can we delay it till user typed?
-	function handleChange() {
-		// update URL state
-		const searchParams = new URLSearchParams(window.location.search);
-		if (statePropToBind === '') {
-			searchParams.delete('s');
+	// We don't use bind:value= with shared state from parent components here, since it is
+	// too complicated with query params & $effect https://bsky.app/profile/paolo.ricciuti.me/post/3lf464y4erc2h)
+
+	// get initial state from url params
+	let searchText = $derived(page.url.searchParams?.get(searchParamsKey) || '');
+
+	function handleChange(evt: Event) {
+		const inputEl = evt.target as HTMLInputElement;
+
+		// get current search params
+		const newSearchParams = page.url.searchParams;
+
+		if (inputEl.value != '') {
+			newSearchParams.set(searchParamsKey, inputEl.value);
 		} else {
-			searchParams.set('s', statePropToBind);
+			newSearchParams.delete(searchParamsKey);
 		}
-		goto(`?${searchParams.toString()}`, { replaceState: false });
+
+		// TODO: find a clever solution for this to not do it in every function?
+		// reset pagination, because there is a new result set
+		newSearchParams.delete('p');
+
+		// call new URL
+		console.log('--- goto called ---', { newSearchParams: newSearchParams.toString() });
+		goto(`?${newSearchParams.toString()}`); // TODO: use replace state?
 	}
 </script>
 
 <label>
-	<input
-		aria-label={label}
-		type="text"
-		bind:value={statePropToBind}
-		onchange={handleChange}
-		{...props}
-	/>
+	<input aria-label={label} type="text" value={searchText} onchange={handleChange} {...props} />
 </label>
 
 <style>
