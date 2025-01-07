@@ -4,11 +4,11 @@ Looking for a job can be tiresome, this directory might help. Good luck!
 
 Demo: https://austrian-web-dev-companies.pages.dev
 
-Hobby project with Svelte v5. 🪄 Read my technical notes [here](https://dev.to/mandrasch/svelte-5-share-state-between-components-for-dummies-4gd2).
+Hobby project with the new Svelte v5 & SvelteKit 🧙 Read my technical notes [here](https://dev.to/mandrasch/svelte-5-share-state-between-components-for-dummies-4gd2).
 
 ## Why?
 
-I like sites such as https://devjobs.at/teams/search, but I think they could be improved with a more stack-focused user interface.
+I like sites such as https://devjobs.at/teams/search, but I think they can be improved with a more "stack-focused" user interface for web developers. Since I wanted to learn the new $state system of Svelte v5 anyway, I started by implementing this.
 
 ## Data sources
 
@@ -20,14 +20,24 @@ Please just add the data to [`static/companies.json`](https://github.com/mandras
 
 If you want to remove your company, please just send me a quick note: matthias-andrasch-kontakt@mailbox.org
 
-## Thanks to ...
+## Resources
 
-- https://simplecss.org/
-- https://github.com/sphade/svelte5-productfilter
-- the Svelte Community for answering questions
+Thanks very much to https://simplecss.org/ and the Svelte Community for answering questions!
+
+### Notes and Discussions
+
+- [Svelte 5: Share state between components (for Dummies) (dev.to)](https://dev.to/mandrasch/svelte-5-share-state-between-components-for-dummies-4gd2)
+- [Feedback regarding $effect and URL params (Bluesky)](https://bsky.app/profile/paolo.ricciuti.me/post/3lf4a7rwjrc2h)
+- [Help with simple pagination and $state (Discord)](https://discord.com/channels/457912077277855764/1325805139126386699)
+- [Import shared $state and use bind=group for checkboxes inside of components (v5)? (Discord)](https://discord.com/channels/457912077277855764/1325055109318709278)
+
+### Further resources
+
+- [Lets Build A Filtering System with Svelte 5 , Sveltekit 2, Tailwind, Upstash (2024) - Lawal Adebola](https://www.youtube.com/watch?v=5urk4ui_l5o)
 
 ## TODOs
 
+- [ ] derive state of query params from '$page/state' (https://bsky.app/profile/paolo.ricciuti.me/post/3lf4a7rwjrc2h)
 - [ ] fix: pagination and ?p reset when new filters are selected (WIP)
 - [ ] fix: reset search text input for "reset filters" button action
 - [ ] store selected tags in URL (WIP)
