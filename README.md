@@ -39,6 +39,7 @@ Thanks very much to https://simplecss.org/ and the Svelte Community for answerin
 
 ## TODOs
 
+- [ ] improve pagination (styling and page count)
 - [x] derive state of query params from '$page/state' (https://bsky.app/profile/paolo.ricciuti.me/post/3lf4a7rwjrc2h)
 - [x] fix: pagination and ?p reset when new filters are selected (WIP)
 - [x] fix: reset search text input for "reset filters" button action
