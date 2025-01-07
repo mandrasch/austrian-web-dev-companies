@@ -6,7 +6,7 @@ Demo: https://austrian-web-dev-companies.pages.dev
 
 Hobby project with the new Svelte v5 & SvelteKit 🧙
 
-Static site generation via [adapter-static](https://svelte.dev/docs/kit/adapter-static). Read my technical notes [here](https://dev.to/mandrasch/svelte-5-share-state-between-components-for-dummies-4gd2).
+Static site generation via [adapter-static](https://svelte.dev/docs/kit/adapter-static).
 
 ## Why?
 
@@ -39,11 +39,12 @@ Thanks very much to https://simplecss.org/ and the Svelte Community for answerin
 
 ## TODOs
 
-- [ ] derive state of query params from '$page/state' (https://bsky.app/profile/paolo.ricciuti.me/post/3lf4a7rwjrc2h)
-- [ ] fix: pagination and ?p reset when new filters are selected (WIP)
-- [ ] fix: reset search text input for "reset filters" button action
-- [ ] store selected tags in URL (WIP)
+- [x] derive state of query params from '$page/state' (https://bsky.app/profile/paolo.ricciuti.me/post/3lf4a7rwjrc2h)
+- [x] fix: pagination and ?p reset when new filters are selected (WIP)
+- [x] fix: reset search text input for "reset filters" button action
+- [x] store selected tags in URL (WIP)
 - [ ] move filters into own component
+- [ ] rename to austrian web dev agencies, company scope is too big?
 - [x] optimize mobile
 - [ ] ui: option to toggle filter view
 - [ ] bonus: add statistics page with overview of used technology

@@ -17,10 +17,8 @@
 		</p>
 
 		<p>
-			Created by <a href="https://mandrasch.dev">Matthias Andrasch</a>, read my
-			<a href="https://dev.to/mandrasch/svelte-5-share-state-between-components-for-dummies-4gd2"
-				>notes</a
-			> about it here.
+			Created by <a href="https://mandrasch.dev">Matthias Andrasch</a>. Find more teams on
+			<a href="https://devjobs.at/teams/search">devjobs.at</a>.
 		</p>
 	</div>
 </footer>
