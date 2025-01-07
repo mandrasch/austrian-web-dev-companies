@@ -8,7 +8,7 @@ Hobby project with the new Svelte v5 & SvelteKit 🧙 Read my technical notes [h
 
 ## Why?
 
-I like sites such as https://devjobs.at/teams/search, but I think they can be improved with a more "stack-focused" user interface for web developers. Since I wanted to learn the new $state system of Svelte v5 anyway, I started by implementing this.
+I like sites such as https://devjobs.at/teams/search, but I think they can be improved with a more "stack-focused" user interface for web developers. Since I wanted to learn the new $state system of Svelte v5 anyway, I started by implementing this. One of the goals is to show how simple a reactive user interface can be implemented with Svelte.
 
 ## Data sources
 

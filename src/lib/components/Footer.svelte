@@ -1,6 +1,6 @@
 <footer>
 	<p>
-		Made with Svelte v5 and Simple.css ✨ (<a
+		Hobby project - made with Svelte v5, SvelteKit and Simple.css ✨ (<a
 			href="https://github.com/mandrasch/austrian-web-dev-companies">Source Code</a
 		>)
 	</p>
@@ -16,7 +16,12 @@
 			<a href="https://matthias-andrasch.eu/impressum-datenschutz/">Imprint & Privacy</a>
 		</p>
 
-		<p>Hobby project, created by <a href="https://mandrasch.dev">Matthias Andrasch</a></p>
+		<p>
+			Created by <a href="https://mandrasch.dev">Matthias Andrasch</a>, read my
+			<a href="https://dev.to/mandrasch/svelte-5-share-state-between-components-for-dummies-4gd2"
+				>notes</a
+			> about it here.
+		</p>
 	</div>
 </footer>
 

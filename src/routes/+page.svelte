@@ -45,10 +45,10 @@
 		}
 	});*/
 
-	// Thanks very much to lt3 for this pattern (via Svelte Discord)
-	// https://discord.com/channels/457912077277855764/1325805139126386699
-
-	// listen for filter state changes only
+	// Listen for filter state changes only
+	// (Thanks very much to lt3 for this pattern, via Svelte Discord:
+	// https://discord.com/channels/457912077277855764/1325805139126386699)
+	// Critical feedback: https://bsky.app/profile/paolo.ricciuti.me/post/3lf464y4erc2h
 	const effectParams = { init: true, exit: false };
 	$effect(() => {
 		// watch for any change in search params
