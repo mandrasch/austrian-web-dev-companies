@@ -3,8 +3,6 @@
 	import { goto } from '$app/navigation';
 	import { building } from '$app/environment';
 
-	import { onMount } from 'svelte';
-
 	let {
 		labelsAndValues,
 		// the URL param to update when selected values change

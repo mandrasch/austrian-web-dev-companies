@@ -21,6 +21,9 @@
 
 		// Our source of thruth for state is building ? page.url.searchParams
 		// TODO: move key names to const helper
+
+		// we need to use a special safe guard here with building, otherwise there will
+		// "Error: Cannot access url.searchParams on a page with prerendering enabled"
 		const selectedJsFrameworks = !building
 			? page.url.searchParams.get('jsFrameworks')?.split(',') || []
 			: [];

@@ -4,7 +4,9 @@ Looking for a job can be tiresome, this directory might help. Good luck!
 
 Demo: https://austrian-web-dev-companies.pages.dev
 
-Hobby project with the new Svelte v5 & SvelteKit 🧙 Read my technical notes [here](https://dev.to/mandrasch/svelte-5-share-state-between-components-for-dummies-4gd2).
+Hobby project with the new Svelte v5 & SvelteKit 🧙
+
+Static site generation via [adapter-static](https://svelte.dev/docs/kit/adapter-static). Read my technical notes [here](https://dev.to/mandrasch/svelte-5-share-state-between-components-for-dummies-4gd2).
 
 ## Why?
 
@@ -24,7 +26,7 @@ If you want to remove your company, please just send me a quick note: matthias-a
 
 Thanks very much to https://simplecss.org/ and the Svelte Community for answering questions!
 
-### Notes and Discussions
+### Notes and discussions
 
 - [Svelte 5: Share state between components (for Dummies) (dev.to)](https://dev.to/mandrasch/svelte-5-share-state-between-components-for-dummies-4gd2)
 - [Feedback regarding $effect and URL params (Bluesky)](https://bsky.app/profile/paolo.ricciuti.me/post/3lf4a7rwjrc2h)
