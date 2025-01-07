@@ -4,6 +4,7 @@
 
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
+	import { building } from '$app/environment';
 
 	let { label = '' as string, searchParamsKey = '' as string, ...props } = $props();
 
@@ -11,13 +12,15 @@
 	// too complicated with query params & $effect https://bsky.app/profile/paolo.ricciuti.me/post/3lf464y4erc2h)
 
 	// get initial state from url params
-	let searchText = $derived(page.url.searchParams?.get(searchParamsKey) || '');
+	let searchText = $derived.by(() => {
+		return !building ? page.url.searchParams?.get(searchParamsKey) || '' : '';
+	});
 
 	function handleChange(evt: Event) {
 		const inputEl = evt.target as HTMLInputElement;
 
 		// get current search params
-		const newSearchParams = page.url.searchParams;
+		const newSearchParams = !building ? page.url.searchParams : new URLSearchParams();
 
 		if (inputEl.value != '') {
 			newSearchParams.set(searchParamsKey, inputEl.value);

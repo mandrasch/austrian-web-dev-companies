@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { fade } from 'svelte/transition';
 	import type { Company } from '$lib/types';
+	import { building } from '$app/environment';
 
 	// all JSON companies
 	let { companiesData } = $props();
@@ -18,14 +19,22 @@
 
 		// very verbose here (again), but we keep it simple and readable here
 
-		// Our source of thruth for state is page.url.searchParams
+		// Our source of thruth for state is building ? page.url.searchParams
 		// TODO: move key names to const helper
-		const selectedJsFrameworks = page.url.searchParams.get('jsFrameworks')?.split(',') || [];
-		const selectedPhpCmses = page.url.searchParams.get('phpCmses')?.split(',') || [];
-		const selectedPhpFrameworks = page.url.searchParams.get('phpFrameworks')?.split(',') || [];
-		const selectedCities = page.url.searchParams.get('cities')?.split(',') || [];
-		const selectedSpecialTags = page.url.searchParams.get('specialTags')?.split(',') || [];
-		const selectedSearchText = page.url.searchParams.get('s') || '';
+		const selectedJsFrameworks = !building
+			? page.url.searchParams.get('jsFrameworks')?.split(',') || []
+			: [];
+		const selectedPhpCmses = !building
+			? page.url.searchParams.get('phpCmses')?.split(',') || []
+			: [];
+		const selectedPhpFrameworks = !building
+			? page.url.searchParams.get('phpFrameworks')?.split(',') || []
+			: [];
+		const selectedCities = !building ? page.url.searchParams.get('cities')?.split(',') || [] : [];
+		const selectedSpecialTags = !building
+			? page.url.searchParams.get('specialTags')?.split(',') || []
+			: [];
+		const selectedSearchText = !building ? page.url.searchParams.get('s') || '' : '';
 
 		// helper var for reset filters button
 		const isFilterSet = [
@@ -38,7 +47,7 @@
 		].some(Boolean);
 
 		const paginationState = {
-			currentPage: parseInt(page.url.searchParams.get('p') || '1'),
+			currentPage: parseInt(!building ? page.url.searchParams.get('p') || '1' : '1'),
 			limit: 5
 		};
 
@@ -110,7 +119,7 @@
 	function updateUrlForPaginationClick() {
 		// Get the current search parameters from the URL,
 		// set new current page for pagination
-		const searchParams = page.url.searchParams;
+		const searchParams = !building ? page.url.searchParams : new URLSearchParams();
 		searchParams.set('p', results.paginationState.currentPage.toString());
 		goto(`?${searchParams.toString()}`);
 	}

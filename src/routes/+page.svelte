@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
 
-	// debug with {JSON.stringify([...page.url.searchParams])}
+	// debug with {JSON.stringify([...building ? page.url.searchParams])}
 	// import { page } from '$app/state';
 
 	import FilterCheckboxes from '$lib/components/FilterCheckboxes.svelte';
