@@ -3,6 +3,9 @@
 	import { goto } from '$app/navigation';
 	import { fade } from 'svelte/transition';
 	import type { Company } from '$lib/types';
+
+	// we need to use a special safe guard here with building, otherwise there will
+	// "Error: Cannot access url.searchParams on a page with prerendering enabled"
 	import { building } from '$app/environment';
 
 	// all JSON companies
@@ -11,7 +14,7 @@
 	// Listen for state changes
 	// Apply the filters based on selected tags from all groups
 	let results = $derived.by(() => {
-		console.log('$derived.by triggered, filter results...');
+		console.log('$derived.by triggered in <ResultList.svelte>, filter results...');
 
 		// start fresh
 		let filteredCompanies: Company[] = [];
@@ -21,9 +24,6 @@
 
 		// Our source of thruth for state is building ? page.url.searchParams
 		// TODO: move key names to const helper
-
-		// we need to use a special safe guard here with building, otherwise there will
-		// "Error: Cannot access url.searchParams on a page with prerendering enabled"
 		const selectedJsFrameworks = !building
 			? page.url.searchParams.get('jsFrameworks')?.split(',') || []
 			: [];
@@ -100,9 +100,6 @@
 					company.teaser.toLowerCase().includes(searchTextLower)
 			);
 		}
-
-		/*console.log({ filteredCompanies });
-		console.log({ paginationState });*/
 
 		// Filtering is done, let's paginate!
 		const startIndex = (paginationState.currentPage - 1) * paginationState.limit;

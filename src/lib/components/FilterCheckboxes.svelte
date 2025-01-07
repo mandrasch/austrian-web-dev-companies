@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
+
+	// we need to use a special safe guard here with building, otherwise there will
+	// "Error: Cannot access url.searchParams on a page with prerendering enabled"
 	import { building } from '$app/environment';
 
 	let {

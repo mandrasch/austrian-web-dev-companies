@@ -1,9 +1,4 @@
 <script lang="ts">
-	import { untrack } from 'svelte';
-
-	// debug with {JSON.stringify([...building ? page.url.searchParams])}
-	// import { page } from '$app/state';
-
 	import FilterCheckboxes from '$lib/components/FilterCheckboxes.svelte';
 	import FilterTextInput from '$lib/components/FilterTextInput.svelte';
 	import ResultList from '$lib/components/ResultList.svelte';
@@ -112,6 +107,7 @@
 			h3 {
 				font-size: 0.85rem;
 
+				// TODO: use class
 				/* Manage height and scrolling behavior for the Cities filter */
 				div:nth-child(3) {
 					max-height: 150px;
