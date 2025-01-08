@@ -144,82 +144,84 @@
 		{/if}
 	</div>
 
-	{#each results.companies as company (company.companyName)}
-		<article>
-			<h3>{company.companyName}</h3>
-			<p>{company.teaser}</p>
-			<p>
-				<a href={company.websiteUrl} target="_blank"
-					>Website <svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="16"
-						height="16"
-						fill="currentColor"
-						class="bi bi-box-arrow-up-right"
-						viewBox="0 0 16 16"
+	<div class="resultList">
+		{#each results.companies as company (company.companyName)}
+			<article>
+				<h3>{company.companyName}</h3>
+				<p>{company.teaser}</p>
+				<p>
+					<a href={company.websiteUrl} target="_blank"
+						>Website <svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							fill="currentColor"
+							class="bi bi-box-arrow-up-right"
+							viewBox="0 0 16 16"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"
+							/>
+							<path
+								fill-rule="evenodd"
+								d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"
+							/>
+						</svg></a
 					>
-						<path
-							fill-rule="evenodd"
-							d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"
-						/>
-						<path
-							fill-rule="evenodd"
-							d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"
-						/>
-					</svg></a
-				>
-				| {#if company.devjobsAtIdentifier != ''}
-					<a
-						href={`https://devjobs.at/jobs/search?company=${company.devjobsAtIdentifier}`}
-						target="_blank"
-						>devjobs.at Jobs <svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="16"
-							height="16"
-							fill="currentColor"
-							class="bi bi-box-arrow-up-right"
-							viewBox="0 0 16 16"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"
-							/>
-							<path
-								fill-rule="evenodd"
-								d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"
-							/>
-						</svg>
-					</a>
+					| {#if company.devjobsAtIdentifier != ''}
+						<a
+							href={`https://devjobs.at/jobs/search?company=${company.devjobsAtIdentifier}`}
+							target="_blank"
+							>devjobs.at Jobs <svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="16"
+								height="16"
+								fill="currentColor"
+								class="bi bi-box-arrow-up-right"
+								viewBox="0 0 16 16"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"
+								/>
+								<path
+									fill-rule="evenodd"
+									d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"
+								/>
+							</svg>
+						</a>
 
-					|
+						|
 
-					<a href={`https://devjobs.at/team/${company.devjobsAtIdentifier}`} target="_blank"
-						>devjobs.at Team <svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="16"
-							height="16"
-							fill="currentColor"
-							class="bi bi-box-arrow-up-right"
-							viewBox="0 0 16 16"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"
-							/>
-							<path
-								fill-rule="evenodd"
-								d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"
-							/>
-						</svg>
-					</a> |
-				{/if}
-				{company.cities.join(', ')} | {company.stackTags.join(', ')}
-				{#if company.specialTags.includes('fourDayWorkWeekOrSimiliar')}
-					| 🪄 4 day work week (or similiar)
-				{/if}
-			</p>
-		</article>
-	{/each}
+						<a href={`https://devjobs.at/team/${company.devjobsAtIdentifier}`} target="_blank"
+							>devjobs.at Team <svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="16"
+								height="16"
+								fill="currentColor"
+								class="bi bi-box-arrow-up-right"
+								viewBox="0 0 16 16"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"
+								/>
+								<path
+									fill-rule="evenodd"
+									d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"
+								/>
+							</svg>
+						</a> |
+					{/if}
+					{company.cities.join(', ')} | {company.stackTags.join(', ')}
+					{#if company.specialTags.includes('fourDayWorkWeekOrSimiliar')}
+						| 🪄 4 day work week (or similiar)
+					{/if}
+				</p>
+			</article>
+		{/each}
+	</div>
 
 	<div class="pagination">
 		{#if results.paginationState.currentPage > 1}
@@ -256,5 +258,14 @@
 		button {
 			font-size: 1rem;
 		}
+	}
+
+	.pagination {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		gap: 1rem;
+		padding-top: 1rem;
 	}
 </style>

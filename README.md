@@ -40,11 +40,12 @@ Thanks very much to https://simplecss.org/ and the Svelte Community for answerin
 ## TODOs
 
 - [ ] improve pagination (styling and page count)
+- [ ] move filters into own component
+- [ ] scroll to results after pagination click (where is the best place for this logic?)
 - [x] derive state of query params from '$page/state' (https://bsky.app/profile/paolo.ricciuti.me/post/3lf4a7rwjrc2h)
 - [x] fix: pagination and ?p reset when new filters are selected (WIP)
 - [x] fix: reset search text input for "reset filters" button action
 - [x] store selected tags in URL (WIP)
-- [ ] move filters into own component
 - [ ] rename to austrian web dev agencies, company scope is too big?
 - [x] optimize mobile
 - [ ] ui: option to toggle filter view

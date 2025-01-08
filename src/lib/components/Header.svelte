@@ -1,7 +1,6 @@
 <header>
 	<a href="/"><h1>Austrian Web Dev Companies ⛰️ 🇦🇹</h1></a>
 	<p>Looking for a job can be tiresome, this directory might help. Good luck!</p>
-	<p>🚧 This website is still under construction 🚧</p>
 </header>
 
 <a

@@ -3,14 +3,14 @@
 	import FilterTextInput from '$lib/components/FilterTextInput.svelte';
 	import ResultList from '$lib/components/ResultList.svelte';
 
-	// Import available values for stack filters, etc. (hardcoded)
+	// Import available values for stack tags, etc.
 	import { availableFilterValues } from '$lib/shared';
 
-	// Receive the current companies data from the `load` function via +page.ts
+	// Receive the company data from `load()` (via +page.ts)
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 
-	// Our source of truth is the URL query param $state,
+	// Our source of truth is the state of URL query param,
 	// see ResultList.svelte and FilterCheckboxes.svelte
 
 	// TODO: might be removed, tried to use it for scroll to results after navigation
@@ -40,7 +40,7 @@
 			<FilterCheckboxes
 				labelsAndValues={data.cityCounts}
 				searchParamsKey="cities"
-				style="max-height:150px; overflow:auto"
+				style="max-height:135px; overflow:scroll;"
 			/>
 		</div>
 
@@ -90,6 +90,12 @@
 			margin-top: 0.5rem;
 		}
 
+		/* special case */
+		.cities {
+			max-height: 150px;
+			overflow: auto;
+		}
+
 		/* Container query for smaller containers */
 		@container filtersContainer (max-width: 768px) {
 			column-gap: 0.5rem;
@@ -106,12 +112,6 @@
 			row-gap: 0.8rem;
 			h3 {
 				font-size: 0.85rem;
-
-				// TODO: use class
-				/* Manage height and scrolling behavior for the Cities filter */
-				div:nth-child(3) {
-					max-height: 150px;
-				}
 			}
 		}
 	}
