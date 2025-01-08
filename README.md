@@ -42,6 +42,7 @@ Thanks very much to https://simplecss.org/ and the Svelte Community for answerin
 - [ ] improve pagination (styling and page count)
 - [ ] move filters into own component
 - [ ] scroll to results after pagination click (where is the best place for this logic?)
+- [ ] Show technologies with logo badges, move this into own component
 - [x] derive state of query params from '$page/state' (https://bsky.app/profile/paolo.ricciuti.me/post/3lf4a7rwjrc2h)
 - [x] fix: pagination and ?p reset when new filters are selected (WIP)
 - [x] fix: reset search text input for "reset filters" button action
@@ -51,10 +52,9 @@ Thanks very much to https://simplecss.org/ and the Svelte Community for answerin
 - [ ] ui: option to toggle filter view
 - [ ] bonus: add statistics page with overview of used technology
 - [x] remove custom class, object is enough for simplicity - https://svelte.dev/playground/17af110213b9434d95dff6ae2e62c100?version=5.16.0
-- [ ] Show technologies with logo
 - [x] update checkboxes inside FilterCheckboxes.svelte when global State changes (!)
 - [x] create <ResultList /> component, https://svelte.dev/playground/17af110213b9434d95dff6ae2e62c100?version=5.16.0
-- [ ] robust data validation for JSON, throw build error for unexpected values (currently everything is casesensitive)
+- [ ] robust data validation for JSON, throw build error for unexpected values (currently casesensitive)
 - [ ] add social share image
 - [x] add seo title and description
 - [x] add header
