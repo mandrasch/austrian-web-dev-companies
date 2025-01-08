@@ -16,6 +16,23 @@
 		return !building ? page.url.searchParams?.get(searchParamsKey) || '' : '';
 	});
 
+	// thx to Fabian for debound & keepFocus:true for goto!
+	// (https://discord.com/channels/457912077277855764/1326399049988964426/1326402417230745620)
+	// TODO: add types
+	function debounce(func, delay) {
+		let timeoutId;
+
+		return function (...args) {
+			clearTimeout(timeoutId);
+
+			timeoutId = setTimeout(() => {
+				func.apply(this, args);
+			}, delay);
+		};
+	}
+
+	const debounceSearch = debounce(handleChange, 400);
+
 	function handleChange(evt: Event) {
 		const inputEl = evt.target as HTMLInputElement;
 
@@ -34,12 +51,14 @@
 
 		// call new URL
 		console.log('--- goto called ---', { newSearchParams: newSearchParams.toString() });
-		goto(`?${newSearchParams.toString()}`); // TODO: use replace state?
+
+		// navigate, but keep focus within the search input
+		goto(`?${newSearchParams.toString()}`, { keepFocus: true });
 	}
 </script>
 
 <label>
-	<input aria-label={label} type="text" value={searchText} onchange={handleChange} {...props} />
+	<input aria-label={label} type="text" value={searchText} onkeyup={debounceSearch} {...props} />
 </label>
 
 <style>

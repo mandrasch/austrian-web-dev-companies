@@ -32,6 +32,7 @@ Thanks very much to https://simplecss.org/ and the Svelte Community for answerin
 - [Feedback regarding $effect and URL params (Bluesky)](https://bsky.app/profile/paolo.ricciuti.me/post/3lf4a7rwjrc2h)
 - [Help with simple pagination and $state (Discord)](https://discord.com/channels/457912077277855764/1325805139126386699)
 - [Import shared $state and use bind=group for checkboxes inside of components (v5)? (Discord)](https://discord.com/channels/457912077277855764/1325055109318709278)
+- [How to properly update query param on text input without losing focus/lag? (Discord)](https://discord.com/channels/457912077277855764/1326399049988964426)
 
 ### Further resources
 
