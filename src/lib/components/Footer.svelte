@@ -21,6 +21,7 @@
 		<div class="col col-links">
 			<p class="jobBoards-intro">Find more companies:</p>
 			<ul class="jobBoards">
+				<li><a href="https://jobs.ams.at/">jobs.ams.at</a></li>
 				<li><a href="https://devjobs.at/teams/search">devjobs.at - Teams</a></li>
 				<li><a href="https://sveltejobs.com/">sveltejobs.com</a></li>
 				<li><a href="https://vuejobs.com/">vuejobs.com</a></li>

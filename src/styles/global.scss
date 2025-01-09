@@ -58,3 +58,26 @@ video {
 	opacity: 0.6;
 }
 /* eo always use dark mode */
+
+/* dark scrollbar */
+
+/* Custom scrollbar styling for WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+	width: 12px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+	background: #1e1e1e; /* Dark background for the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #555; /* Darker thumb color */
+	border-radius: 10px; /* Rounded corners for a smooth look */
+	border: 2px solid #1e1e1e; /* Adds some spacing around the thumb */
+}
+
+/* Styling for Firefox (scrollbar-gutter property for scrollbar width control) */
+* {
+	scrollbar-color: #555 #1e1e1e; /* Thumb color and track color */
+	scrollbar-width: thin; /* Makes the scrollbar thinner in Firefox */
+}
